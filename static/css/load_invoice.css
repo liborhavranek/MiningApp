@@ -1,8 +1,6 @@
-    .form-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: margin-top 0.3s ease;
+.invoice-form {
+        margin-left: 15%; /* adjust as needed */
+        margin-right: 15%; /* adjust as needed */
     }
 
     .form-moved {
