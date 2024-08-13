@@ -63,6 +63,10 @@ with app.app_context():
 def hello_world():
     return render_template("index.html")
 
+@app.route('/invoicelist')
+def invoice_list():
+    return render_template("invoice_list.html")
+
 
 @app.route('/nahratfakturu', methods=['GET', 'POST'])
 def upload_file():
