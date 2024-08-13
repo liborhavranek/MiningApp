@@ -1,0 +1,62 @@
+body {
+    background: linear-gradient(135deg, #800080, #e0b3e6);
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding-top: 120px; /* Posunutí obsahu o kousek dolů kvůli prostoru nad navbar */
+    scroll-padding-top: 120px;
+}
+
+nav.navbar {
+    position: fixed;
+    top: 50px;
+    left: 300px;
+    right: 300px;
+    z-index: 1000;
+    background-color: #0f172a;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+nav.navbar a.nav-link {
+    color: #ffffff !important;
+}
+
+nav.navbar a.nav-link:hover {
+    color: #e0b3e6 !important;
+}
+
+nav.navbar.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Mezera mezi tlačítky */
+}
+
+.button-container .btn-large {
+    flex: 1 1 200px; /* Tlačítka se přizpůsobí velikosti */
+}
+
+.btn-large {
+    padding: 100px 200px; /* Velké tlačítko s větším paddingem */
+    font-size: 1.25rem; /* Zvýšená velikost písma */
+    border: 2px solid #0f172a; /* Tmavě modrý okraj pro tlačítka */
+    background-color: transparent; /* Průhledné pozadí */
+    color: #0f172a; /* Tmavě modrý text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-large:hover {
+    background-color: #0f172a; /* Tmavě modré pozadí při najetí myší */
+    color: #ffffff; /* Bílé texty při najetí myší */
+}
+
+.container-fluid {
+    padding: 0 250px;
+}
