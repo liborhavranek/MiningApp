@@ -1,12 +1,14 @@
 import os
 import hashlib
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
+
+app.secret_key = "secret_key"
 
 # Konfigurace SQLAlchemy
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -65,7 +67,20 @@ def hello_world():
 
 @app.route('/invoicelist')
 def invoice_list():
-    return render_template("invoice_list.html")
+    faktury = Invoice.query.all()
+    return render_template("invoice_list.html", faktury=faktury)
+
+@app.route('/delete_invoice/<int:id>', methods=['POST'])
+def delete_invoice(id):
+    invoice_to_delete = Invoice.query.get_or_404(id)
+    try:
+        db.session.delete(invoice_to_delete)
+        db.session.commit()
+        flash('Faktura byla úspěšně smazána!', 'success')
+        return redirect(url_for('invoice_list'))
+    except:
+        flash('Nastala chyba při mazání faktury.', 'danger')
+        return redirect(url_for('invoice_list'))
 
 
 @app.route('/nahratfakturu', methods=['GET', 'POST'])
@@ -149,7 +164,7 @@ def upload_file():
             db.session.add(new_invoice)
             db.session.commit()
 
-            return redirect(url_for('hello_world'))
+            return redirect(url_for('invoice_list'))
 
     return render_template("load_invoice.html")
 

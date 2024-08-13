@@ -1,12 +1,87 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-fluid" id="myDiv">
+<div class="container-fluid">
     <div class="row justify-content-center">
-                        <h1 class="py-5 text-center">Seznam faktur</h1>
+        <h1 class="py-5 text-center">Seznam faktur</h1>
 
+        <div class="col-md-10">
+            <div class="table-responsive">
+            {% for faktura in faktury %}
+                <table class="table table-bordered pb-5">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="2">Faktura</th>
+                            <th class="text-right">ID: {{ faktura.id }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Odběratel -->
+                        <tr class="table-primary">
+                            <td colspan="2"><strong>Odběratel:</strong> {{ faktura.jmeno_odberatele }}</td>
+                            <td class="text-right"><strong>IČO:</strong> {{ faktura.ico_odberatele }} <br> <strong>DIČ:</strong> {{ faktura.dic_odberatele }}</td>
+                        </tr>
+
+                        <!-- Dodavatel -->
+                        <tr class="table-secondary">
+                            <td colspan="2"><strong>Dodavatel:</strong> {{ faktura.jmeno_dodavatele }}</td>
+                            <td class="text-right"><strong>IČO:</strong> {{ faktura.ico_dodavatele }} <br> <strong>DIČ:</strong> {{ faktura.dic_dodavatele }}</td>
+                        </tr>
+
+                        <!-- Datumy -->
+                        <tr class="table-light">
+                            <td><strong>Datum vystavení:</strong> {{ faktura.datum_vystaveni }}</td>
+                            <td><strong>Datum splatnosti:</strong> {{ faktura.datum_splatnosti }}</td>
+                            <td class="text-right"><strong>Datum UZP:</strong> {{ faktura.datum_uzp }}</td>
+                        </tr>
+
+                        <!-- Základní informace -->
+                        <tr class="table-warning">
+                            <td colspan="2"><strong>Evidenční číslo:</strong> {{ faktura.evidencni_cislo }}</td>
+                            <td class="text-right"><strong>Typ faktury:</strong> {{ faktura.typ_faktury }}</td>
+                        </tr>
+
+                        <!-- Platba -->
+                        <tr class="table-info">
+                            <td colspan="2"><strong>Číslo účtu:</strong> {{ faktura.cislo_uctu }}</td>
+                            <td class="text-right"><strong>Měna:</strong> {{ faktura.mena }}</td>
+                        </tr>
+
+                        <!-- Ceny -->
+                        <tr class="table-success">
+                            <td><strong>Cena bez DPH 21%:</strong> {{ faktura.bez_dph_21 }}</td>
+                            <td><strong>Cena s DPH 21%:</strong> {{ faktura.vc_dph_21 }}</td>
+                            <td class="text-right"><strong>DPH 21%:</strong> {{ faktura.dph_21 }}</td>
+                        </tr>
+                        <tr class="table-success">
+                            <td><strong>Cena bez DPH 12%:</strong> {{ faktura.bez_dph_12 }}</td>
+                            <td><strong>Cena s DPH 12%:</strong> {{ faktura.vc_dph_12 }}</td>
+                            <td class="text-right"><strong>DPH 12%:</strong> {{ faktura.dph_12 }}</td>
+                        </tr>
+                        <tr class="table-success">
+                            <td><strong>Cena bez DPH 0%:</strong> {{ faktura.bez_dph_0 }}</td>
+                            <td><strong>Celková cena:</strong> {{ faktura.cena_celkem }}</td>
+                            <td class="text-right"><strong>DPH celkem:</strong> {{ faktura.dph_celkem }}</td>
+                        </tr>
+                        <tr class="table-success">
+                            <td colspan="2"><strong>Zaokrouhlení:</strong> {{ faktura.zaokrouhleni }}</td>
+                            <td class="text-right"><strong>RPDP:</strong> {{ faktura.rpdp }}</td>
+                        </tr>
+
+                                                <!-- Tlačítko pro smazání faktury -->
+                        <tr class="table-danger">
+                            <td colspan="3" class="text-right">
+                                <form action="{{ url_for('delete_invoice', id=faktura.id) }}" method="POST" onsubmit="return confirm('Opravdu chcete smazat tuto fakturu?');">
+                                    <button type="submit" class="btn btn-danger">Smazat</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
-
 {% endblock content %}
