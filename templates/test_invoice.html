@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" id="myDiv">
+    <div class="row justify-content-center">
+        <div class="form-container " id="form-container">
+            <h1 class="py-5 text-center">Testování faktury {{ invoice.id }}</h1>
+
+            <!-- Formulář pro odeslání dat -->
+            <form id="invoiceForm" method="post" action="{{ url_for('send_file', id=invoice.id) }}" enctype="multipart/form-data">
+                <label for="prompt">Prompt:</label>
+                <textarea name="prompt" rows="15" cols="150" placeholder="Prompt..." required>
+Write down information from the document in the following json format only and exactly. No text before json.
+If the information is not present, write null on the place of the value. If there is not a price for the whole document, write null in place of price with/without vat, prices should be in the format 1500.00 (no spaces or commas or currency) and have number type, not string. All other things should be strings or bools.
+
+{
+"ID": identifikacni cislo dokumentu (obcas nema label, byva na zacatku dokumentu),
+"TYPE": druh dokladu, z možností ("Faktura", "Účtenka", "Opravný doklad", "Záloha") nebo jiné,
+"IC_SUPPLIER": IČ dodavatele,
+"DIC_SUPPLIER": DIČ dodavatele,
+"IC_CUSTOMER": IČ odběratele,
+"DIC_CUSTOMER": DIČ odběratele,
+"VARIABLE_SYMBOL": variabilní symbol pro zaplacení faktury,
+"PUBLICATION_DATE": datum vystavení,
+"TAX_POINT": datum uskutečnění zdanitelného plnění,
+"DUE_DATE": datum splatnosti,
+"ACCOUNT_NUMBER": číslo účtu pro zaplacení faktury preferuje se formát např. 2000145399/0800,
+"PRICE_INCLUDING_VAT": celková cena s dph,
+"PRICE_WITHOUT_VAT": celková cena bez dph,
+"VAT_AMOUNT": celkem DPH,
+"CURRENCY": měna (CZK, EUR, ...),
+"SUPPLIER_EVIDENCE_NUMBER": položka u labelu 'evidenční číslo', jinak null,
+"IS_DEFERRED_TAX": true/false, je faktura v režimu přenesené daňové povinnosti (daň odvede zákazník)?,
+"VAT_TABLE": pro každé jiné pocento DPH jsou tu informace o cenách všech položek pro dané procento [
+{
+"VAT_RATE": procento dph,
+"PRICE_INCLUDING_VAT": celková cena s dph,
+"PRICE_WITHOUT_VAT": celková cena bez dph,
+"VAT_AMOUNT": celkem DPH
+}, ...
+]
+}
+                </textarea><br>
+
+                <label for="model">Model:</label>
+                <select name="model" required>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+                </select><br>
+                <input type="submit" value="Send Data">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

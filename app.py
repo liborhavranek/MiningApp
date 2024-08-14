@@ -1,7 +1,9 @@
 import os
 import hashlib
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash
+
+import requests
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
@@ -9,6 +11,8 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 app.secret_key = "secret_key"
+API_URL = "https://documents-ai.netglade.cz/process-document"  # URL pro API
+UPLOAD_FOLDER = 'uploads'
 
 # Konfigurace SQLAlchemy
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -249,6 +253,66 @@ def edit_invoice(id):
 
     return render_template("edit_invoice.html", invoice=invoice)
 
+
+@app.route('/testinvoice/<int:id>', methods=['GET', 'POST'])
+def test_invoice(id):
+    invoice = Invoice.query.get_or_404(id)
+
+    return render_template("test_invoice.html", invoice=invoice)
+
+
+@app.route('/send_file<int:id>', methods=['POST'])
+def send_file(id):
+    invoice = Invoice.query.get_or_404(id)
+    file_path = os.path.join(UPLOAD_FOLDER, invoice.filename)
+    if not os.path.exists(file_path):
+        return "File not found", 404
+
+    with open(file_path, 'rb') as file:
+        prompt = request.form['prompt']
+        model = request.form['model']
+        files = {
+            'prompt': (None, prompt),
+            'model': (None, model),
+            'file': (invoice.filename, file, 'application/octet-stream')
+        }
+        response = requests.post(API_URL, files=files)
+
+        if response.status_code == 200:
+            result = response.json()
+            key_descriptions = {
+                'ID': 'Číslo dokladu',
+                'TYPE': 'Typ',
+                'IC_SUPPLIER': 'IČO dodavatele',
+                'DIC_SUPPLIER': 'DIC dodavatele',
+                'IC_CUSTOMER': 'IČO odběratele',
+                'DIC_CUSTOMER': 'DIC odběratele',
+                'VARIABLE_SYMBOL': 'Variabilní symbol ',
+                'PUBLICATION_DATE': 'Datum vystavení',
+                'TAX_POINT': 'Datum UZP',
+                'DUE_DATE': 'Datum splatnosti',
+                'ACCOUNT_NUMBER': 'Číslo účtu',
+
+                'PRICE_INCLUDING_VAT': 'Cena včetně DPH',
+                'PRICE_WITHOUT_VAT': 'Cena bez DPH',
+                'VAT_AMOUNT': 'DPH',
+
+                'CURRENCY': 'Měna',
+                'SUPPLIER_EVIDENCE_NUMBER': 'Evidenční číslo odběratele',
+                'IS_DEFERRED_TAX': 'RPDP',
+                'BANK_ACCOUNT': 'Číslo účtu',
+
+                'ICO_SUPPLIER': 'IČO dodavatele',
+                'CIN_SUPPLIER': 'IČO dodavatele',
+
+
+
+
+
+            }
+            return render_template('results.html', json_data=result, key_descriptions=key_descriptions, invoice=invoice)
+        else:
+            return f"Error: {response.status_code}, {response.text}", response.status_code
 
 if __name__ == '__main__':
     app.run(port=5002, debug=True)

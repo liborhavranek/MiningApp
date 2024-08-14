@@ -1,0 +1,43 @@
+{
+    "metadata": {
+        "inputTokens": 1595,
+        "outputTokens": 229,
+        "priceUsd": 0.0063,
+        "pages": [
+            {
+                "type": "pdfStandard",
+                "width": 2481,
+                "height": 3508,
+                "rescaledWidth": 768,
+                "rescaledHeight": 1085
+            }
+        ]
+    },
+    "result": {
+        "ID": "240733",
+        "TYPE": "Faktura",
+        "IC_SUPPLIER": "48207691",
+        "DIC_SUPPLIER": "CZ48207691",
+        "IC_CUSTOMER": "27649652",
+        "DIC_CUSTOMER": null,
+        "VARIABLE_SYMBOL": "240733",
+        "PUBLICATION_DATE": "14.08.2024",
+        "TAX_POINT": "14.08.2024",
+        "DUE_DATE": "28.08.2024",
+        "ACCOUNT_NUMBER": "76202231/0100",
+        "PRICE_INCLUDING_VAT": 10233.0,
+        "PRICE_WITHOUT_VAT": 9136.6,
+        "VAT_AMOUNT": 1096.4,
+        "CURRENCY": "CZK",
+        "SUPPLIER_EVIDENCE_NUMBER": null,
+        "IS_DEFERRED_TAX": false,
+        "VAT_TABLE": [
+            {
+                "VAT_RATE": "12",
+                "PRICE_INCLUDING_VAT": 10233.0,
+                "PRICE_WITHOUT_VAT": 9136.6,
+                "VAT_AMOUNT": 1096.4
+            }
+        ]
+    }
+}

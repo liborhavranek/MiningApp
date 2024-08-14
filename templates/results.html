@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="py-5 text-center">Výsledky</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Data z JSON</h2>
+            <pre>{{ json_data | tojson(indent=2) }}</pre> <!-- Zobrazí JSON formátovaný s odsazením -->
+        </div>
+        <div class="col-md-4">
+            <h2>Vytěžené údaje z faktury</h2>
+            <dl class="row">
+                {% for key, description in key_descriptions.items() %}
+                    {% if json_data.result[key] %}
+                        <dt class="col-sm-4">{{ description }}</dt>
+                        <dd class="col-sm-8">{{ json_data.result[key] }}</dd>
+                    {% endif %}
+                {% endfor %}
+
+
+
+<!--                {% for vat_entry in json_data.result.VAT_TABLE %}-->
+<!--                    <tr>-->
+<!--                        Musím úplně předělat jestli budeme chtít i položky -->
+<!--                        <td>{{ vat_entry.PRICE_INCLUDING_VAT }}</td>-->
+<!--                        <td>{{ vat_entry.PRICE_WITHOUT_VAT }}</td>-->
+<!--                        <td>{{ vat_entry.VAT_AMOUNT }}</td>-->
+<!--                        <td>{{ vat_entry.VAT_RATE }}</td>-->
+<!--                    </tr>-->
+<!--                    {% endfor %}-->
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <h2>Skutečné údaje na faktuře </h2>
+
+
+<dl class="row">
+                <dt class="col-sm-4">ID</dt>
+                <dd class="col-sm-8">{{ invoice.id }}</dd>
+
+                <dt class="col-sm-4">Typ faktury</dt>
+                <dd class="col-sm-8">{{ invoice.typ_faktury }}</dd>
+
+                <dt class="col-sm-4">Jméno dodavatele</dt>
+                <dd class="col-sm-8">{{ invoice.jmeno_dodavatele }}</dd>
+
+                <dt class="col-sm-4">IČ dodavatele</dt>
+                <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
+
+                <dt class="col-sm-4">DIČ dodavatele</dt>
+                <dd class="col-sm-8">{{ invoice.dic_dodavatele }}</dd>
+
+                <dt class="col-sm-4">Jméno odběratele</dt>
+                <dd class="col-sm-8">{{ invoice.jmeno_odberatele }}</dd>
+
+                <dt class="col-sm-4">IČ odběratele</dt>
+                <dd class="col-sm-8">{{ invoice.ico_odberatele }}</dd>
+
+                <dt class="col-sm-4">DIČ odběratele</dt>
+                <dd class="col-sm-8">{{ invoice.dic_odberatele }}</dd>
+
+                <dt class="col-sm-4">Datum vystavení</dt>
+                <dd class="col-sm-8">{{ invoice.datum_vystaveni }}</dd>
+
+                <dt class="col-sm-4">Datum splatnosti</dt>
+                <dd class="col-sm-8">{{ invoice.datum_splatnosti }}</dd>
+
+                <dt class="col-sm-4">Datum uzp</dt>
+                <dd class="col-sm-8">{{ invoice.datum_uzp }}</dd>
+
+                <dt class="col-sm-4">Číslo účtu</dt>
+                <dd class="col-sm-8">{{ invoice.cislo_uctu }}</dd>
+
+                <dt class="col-sm-4">Měna</dt>
+                <dd class="col-sm-8">{{ invoice.mena }}</dd>
+
+                <dt class="col-sm-4">Variabilní symbol</dt>
+                <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
+
+                <dt class="col-sm-4">Cena</dt>
+                <dd class="col-sm-8">{{ invoice.price }}</dd>
+
+                <dt class="col-sm-4">DPH celkem</dt>
+                <dd class="col-sm-8">{{ invoice.dph_celkem }}</dd>
+
+                <dt class="col-sm-4">Cena celkem</dt>
+                <dd class="col-sm-8">{{ invoice.cena_celkem }}</dd>
+
+                <dt class="col-sm-4">Zaokrouhlení</dt>
+                <dd class="col-sm-8">{{ invoice.zaokrouhleni }}</dd>
+            </dl>
+        </div>
+    </div>
+
+
+  <dl class="row">
+                <!-- Porovnání ID -->
+                <dt class="col-sm-4">Variabilní symbol</dt>
+                <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
+                <dt class="col-sm-4">Variabilní symbol(JSON)</dt>
+                <dd class="col-sm-8">
+                    {{ json_data.result.VARIABLE_SYMBOL }}
+                    {% if json_data.result.VARIABLE_SYMBOL == invoice.variabilni_symbol %}
+                        (Shoduje se)
+                    {% else %}
+                        (Neshoduje se)
+                    {% endif %}
+                </dd>
+
+                <!-- Další porovnání -->
+                <dt class="col-sm-4">IČ dodavatele</dt>
+                <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
+                <dt class="col-sm-4">IČ dodavatele (JSON)</dt>
+                <dd class="col-sm-8">
+                    {{ json_data.result.IC_SUPPLIER }}
+                    {% if json_data.result.IC_SUPPLIER == invoice.ico_dodavatele %}
+                        (Shoduje se)
+                    {% else %}
+                        (Neshoduje se)
+                    {% endif %}
+                </dd>
+
+            </dl>
+
+
+
+</div>
+{% endblock content %}
+
+
