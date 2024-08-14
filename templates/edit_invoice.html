@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" id="myDiv">
+    <div class="row justify-content-center">
+        <!-- Formulář pro editaci faktury -->
+        <div class="form-container" id="form-container">
+            <h1 class="py-5 text-center">Editace faktury</h1>
+
+            <form action="{{ url_for('edit_invoice', id=invoice.id) }}" method="post" enctype="multipart/form-data" class="invoice-form">
+
+                <!-- Nahrát nový soubor, pokud je to potřeba -->
+                <div class="form-group">
+                    <label for="file">Soubor (nepovinné):</label>
+                    <input class="form-control" type="file" id="file" name="file" accept="image/*">
+                </div>
+
+                <div class="form-group mt-5">
+                    <label for="nazev-faktury">Název faktury (pojmenujte si fakturu podle svého uvážení, povinné pole):</label>
+                    <input type="text" class="form-control" id="nazev-faktury" name="nazev-faktury" value="{{ invoice.nazev_faktury }}" required>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Základní informace</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="evidencni-cislo">Evidenční číslo:</label>
+                                <input type="text" class="form-control" id="evidencni-cislo" name="evidencni-cislo" value="{{ invoice.evidencni_cislo }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="typ-faktury">Typ faktury:</label>
+                                <input type="text" class="form-control" id="typ-faktury" name="typ-faktury" value="{{ invoice.typ_faktury }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Kontakty</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="jmeno-dodavatele">Jméno dodavatele:</label>
+                                <input type="text" class="form-control" id="jmeno-dodavatele" name="jmeno-dodavatele" value="{{ invoice.jmeno_dodavatele }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="ico-dodavatele">IČO dodavatele:</label>
+                                <input type="text" class="form-control" id="ico-dodavatele" name="ico-dodavatele" value="{{ invoice.ico_dodavatele }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dic-dodavatele">DIČ dodavatele:</label>
+                                <input type="text" class="form-control" id="dic-dodavatele" name="dic-dodavatele" value="{{ invoice.dic_dodavatele }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="jmeno-odberatele">Jméno odběratele:</label>
+                                <input type="text" class="form-control" id="jmeno-odberatele" name="jmeno-odberatele" value="{{ invoice.jmeno_odberatele }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="ico-odberatele">IČO odběratele:</label>
+                                <input type="text" class="form-control" id="ico-odberatele" name="ico-odberatele" value="{{ invoice.ico_odberatele }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dic-odberatele">DIČ odběratele:</label>
+                                <input type="text" class="form-control" id="dic-odberatele" name="dic-odberatele" value="{{ invoice.dic_odberatele }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Datumy</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="datum-vystaveni">Datum vystavení:</label>
+                                <input type="date" class="form-control" id="datum-vystaveni" name="datum-vystaveni" value="{{ invoice.datum_vystaveni.strftime('%Y-%m-%d') if invoice.datum_vystaveni else '' }}">>
+                            </div>
+                            <div class="form-group">
+                                <label for="datum-splatnosti">Datum splatnosti:</label>
+                                <input type="date" class="form-control" id="datum-splatnosti" name="datum-splatnosti" value="{{ invoice.datum_splatnosti.strftime('%Y-%m-%d')  if invoice.datum_splatnosti else ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="datum-uzp">Datum UZP:</label>
+                                <input type="date" class="form-control" id="datum-uzp" name="datum-uzp" value="{{ invoice.datum_uzp.strftime('%Y-%m-%d') if invoice.datum_uzp else ''}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Platba</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cislo-uctu">Číslo účtu:</label>
+                                <input type="text" class="form-control" id="cislo-uctu" name="cislo-uctu" value="{{ invoice.cislo_uctu }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="mena">Měna:</label>
+                                <input type="text" class="form-control" id="mena" name="mena" value="{{ invoice.mena }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="variabilni-symbol">Variabilní symbol:</label>
+                                <input type="text" class="form-control" id="variabilni-symbol" name="variabilni-symbol" value="{{ invoice.variabilni_symbol }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Úhrada</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="price">Cena celkem bez DPH:</label>
+                                <input type="text" class="form-control" id="price" name="price" value="{{ invoice.price }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dph-celkem">DPH celkem:</label>
+                                <input type="text" class="form-control" id="dph-celkem" name="dph-celkem" value="{{ invoice.dph_celkem }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="zaokrouhleni">Zaokrouhlení:</label>
+                                <input type="text" class="form-control" id="zaokrouhleni" name="zaokrouhleni" value="{{ invoice.zaokrouhleni }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cena-celkem">Cena celkem:</label>
+                                <input type="text" class="form-control" id="cena-celkem" name="cena-celkem" value="{{ invoice.cena_celkem }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="rpdp">RPDP:</label>
+                                <input type="text" class="form-control" id="rpdp" name="rpdp" value="{{ invoice.rpdp }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 class="py-1 pt-3 text-center">Položky</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vc-dph-21">Vč. DPH 21%:</label>
+                                <input type="text" class="form-control" id="vc-dph-21" name="vc-dph-21" value="{{ invoice.vc_dph_21 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="bez-dph-21">Bez DPH 21%:</label>
+                                <input type="text" class="form-control" id="bez-dph-21" name="bez-dph-21" value="{{ invoice.bez_dph_21 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dph-21">DPH 21%:</label>
+                                <input type="text" class="form-control" id="dph-21" name="dph-21" value="{{ invoice.dph_21 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="bez-dph-0">Bez DPH 0%:</label>
+                                <input type="text" class="form-control" id="bez-dph-0" name="bez-dph-0" value="{{ invoice.bez_dph_0 }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vc-dph-12">Vč. DPH 12%:</label>
+                                <input type="text" class="form-control" id="vc-dph-12" name="vc-dph-12" value="{{ invoice.vc_dph_12 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="bez-dph-12">Bez DPH 12%:</label>
+                                <input type="text" class="form-control" id="bez-dph-12" name="bez-dph-12" value="{{ invoice.bez_dph_12 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dph-12">DPH 12%:</label>
+                                <input type="text" class="form-control" id="dph-12" name="dph-12" value="{{ invoice.dph_12 }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dph-0">DPH 0%:</label>
+                                <input type="text" class="form-control" id="dph-0" name="dph-0" value="{{ invoice.dph_0 }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-button text-center">
+                    <button type="submit" class="btn btn-primary center my-3"><i class="fas fa-save"></i> Uložit změny</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pro zobrazení obrázku na celé stránce -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button id="close-modal" class="btn btn-dark">Zavřít</button>
+        <img id="modal-image" src="#" alt="Full-screen náhled" />
+    </div>
+</div>
+
+{% endblock content %}

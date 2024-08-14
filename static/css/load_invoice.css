@@ -3,6 +3,15 @@
         margin-right: 15%; /* adjust as needed */
     }
 
+    .form-div {
+    background-color: #0f172a;
+    }
+
+    .form-label,
+     .ls-tight{
+    color: #c9d2e1;
+    }
+
     .form-moved {
         margin-top: 50px; /* adjust as needed */
     }

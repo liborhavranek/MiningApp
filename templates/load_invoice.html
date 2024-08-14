@@ -5,14 +5,24 @@
     <div class="row justify-content-center">
         <!-- Formulář pro nahrání souboru -->
 
-            <div class="form-container" id="form-container">
+            <div class="form-container " id="form-container">
                 <h1 class="py-5 text-center">Nahrát fakturu</h1>
 
        <form action="/nahratfakturu" method="post" enctype="multipart/form-data" class="invoice-form">
 
+<!--               <div id="preview" class="text-center mx-4">-->
+<!--                        <h5>Náhled souboru:</h5>-->
+<!--                        <img id="preview-image" src="#" alt="Náhled" class="img-fluid" />-->
+<!--               </div>-->
+
                     <div class="form-group">
                         <label for="file">Soubor:</label>
                         <input class="form-control" type="file" id="file" name="file" accept="image/*">
+                    </div>
+
+                    <div class="form-group mt-5">
+                        <label for="evidencni-cislo">Název faktury (pojmenujte si fakturu podle svého uvážení, povinné pole):</label>
+                        <input type="text" class="form-control" id="nazev-faktury" name="nazev-faktury" required>
                     </div>
 
                     <div class="row">
@@ -21,13 +31,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="evidencni-cislo">Evidenční číslo:</label>
-                                        <input type="text" class="form-control" id="evidencni-cislo" name="evidencni-cislo" required>
+                                        <input type="text" class="form-control" id="evidencni-cislo" name="evidencni-cislo">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="typ-faktury">Typ faktury:</label>
-                                        <input type="text" class="form-control" id="typ-faktury" name="typ-faktury" required>
+                                        <input type="text" class="form-control" id="typ-faktury" name="typ-faktury">
                                     </div>
                                 </div>
                             </div>
@@ -39,11 +49,11 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="jmeno-dodavatele">Jméno dodavatele:</label>
-                                    <input type="text" class="form-control" id="jmeno-dodavatele" name="jmeno-dodavatele" required>
+                                    <input type="text" class="form-control" id="jmeno-dodavatele" name="jmeno-dodavatele">
                                 </div>
                                 <div class="form-group">
                                     <label for="ico-dodavatele">IČO dodavatele:</label>
-                                    <input type="text" class="form-control" id="ico-dodavatele" name="ico-dodavatele" required>
+                                    <input type="text" class="form-control" id="ico-dodavatele" name="ico-dodavatele">
                                 </div>
                                 <div class="form-group">
                                     <label for="dic-dodavatele">DIČ dodavatele:</label>
@@ -53,11 +63,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="jmeno-odberatele">Jméno odběratele:</label>
-                                        <input type="text" class="form-control" id="jmeno-odberatele" name="jmeno-odberatele" required>
+                                        <input type="text" class="form-control" id="jmeno-odberatele" name="jmeno-odberatele">
                                     </div>
                                     <div class="form-group">
                                         <label for="ico-odberatele">IČO odběratele:</label>
-                                        <input type="text" class="form-control" id="ico-odberatele" name="ico-odberatele" required>
+                                        <input type="text" class="form-control" id="ico-odberatele" name="ico-odberatele">
                                     </div>
                                     <div class="form-group">
                                         <label for="dic-odberatele">DIČ odběratele:</label>
@@ -73,17 +83,17 @@
                                 <div class="col-md-6">
                                  <div class="form-group">
                                     <label for="datum-vystaveni">Datum vystavení:</label>
-                                    <input type="date" class="form-control" id="datum-vystaveni" name="datum-vystaveni" required>
+                                    <input type="date" class="form-control" id="datum-vystaveni" name="datum-vystaveni">
                                 </div>
                                 <div class="form-group">
                                     <label for="datum-splatnosti">Datum splatnosti:</label>
-                                    <input type="date" class="form-control" id="datum-splatnosti" name="datum-splatnosti" required>
+                                    <input type="date" class="form-control" id="datum-splatnosti" name="datum-splatnosti">
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="datum-uzp">Datum UZP:</label>
-                                        <input type="date" class="form-control" id="datum-uzp" name="datum-uzp" required>
+                                        <input type="date" class="form-control" id="datum-uzp" name="datum-uzp">
                                     </div>
                                 </div>
                             </div>
@@ -95,17 +105,17 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cislo-uctu">Číslo účtu:</label>
-                                    <input type="text" class="form-control" id="cislo-uctu" name="cislo-uctu" required>
+                                    <input type="text" class="form-control" id="cislo-uctu" name="cislo-uctu">
                                 </div>
                                 <div class="form-group">
                                     <label for="mena">Měna:</label>
-                                    <input type="text" class="form-control" id="mena" name="mena" required>
+                                    <input type="text" class="form-control" id="mena" name="mena">
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="variabilni-symbol">Variabilní symbol:</label>
-                                        <input type="text" class="form-control" id="variabilni-symbol" name="variabilni-symbol" required>
+                                        <input type="text" class="form-control" id="variabilni-symbol" name="variabilni-symbol">
                                     </div>
                                 </div>
                             </div>
@@ -118,11 +128,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="price">Cena celkem bez DPH:</label>
-                                        <input type="text" class="form-control" id="price" name="price" required>
+                                        <input type="text" class="form-control" id="price" name="price">
                                     </div>
                                     <div class="form-group">
                                         <label for="dph-celkem">DPH celkem:</label>
-                                        <input type="text" class="form-control" id="dph-celkem" name="dph-celkem" required>
+                                        <input type="text" class="form-control" id="dph-celkem" name="dph-celkem">
                                     </div>
                                    <div class="form-group">
                                         <label for="zaokrouhleni">Zaokrouhlení:</label>
@@ -132,7 +142,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cena-celkem">Cena celkem:</label>
-                                        <input type="text" class="form-control" id="cena-celkem" name="cena-celkem" required>
+                                        <input type="text" class="form-control" id="cena-celkem" name="cena-celkem">
                                     </div>
                                     <div class="form-group">
                                         <label for="rpdp">RPDP:</label>
@@ -188,10 +198,7 @@
             <div class="submit-button text-center">
                 <button type="submit" class="btn btn-primary center my-3"><i class="fas fa-upload"></i> Uložit doklad</button>
             </div>
-            <div id="preview" class="text-center mt-4">
-                <h5>Náhled souboru:</h5>
-                <img id="preview-image" src="#" alt="Náhled" class="img-fluid" />
-            </div>
+
         </form>
             </div>
     </div>

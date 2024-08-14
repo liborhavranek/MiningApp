@@ -1,0 +1,32 @@
+.invoice-details {
+        padding-left: 15%; /* adjust as needed */
+        padding-right: 15%; /* adjust as needed */
+    }
+
+    .info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Odstup mezi jednotlivými položkami */
+}
+
+.info-row span {
+    flex: 1; /* Umožňuje roztažení položek na stejné šířce */
+}
+
+.contacts-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Odstup mezi bloky */
+}
+
+.contacts-group {
+    flex: 1; /* Umožňuje blokům rovnoměrné rozložení */
+}
+
+.contacts-group h4 {
+    margin-bottom: 10px;
+}
+
+.contacts-group p {
+    margin: 5px 0;
+}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" id="myDiv">
+    <div class="row justify-content-center">
+
+    <h1 class="py-5 text-center">Detail faktury číslo  {{ invoice.id }}</h1>
+
+    <h1 class="pb-5 text-center">{{ invoice.nazev_faktury }}</h1>
+
+        <div class="invoice-details border border-dark rounded-5 mb-5">
+    <div class="invoice-section my-3">
+        <h4>Základní informace</h4>
+        <div class="info-row">
+            <span><strong>Evidenční číslo:</strong> {{ invoice.evidencni_cislo }}</span>
+            <span><strong>Typ faktury:</strong> {{ invoice.typ_faktury }}</span>
+        </div>
+    </div>
+
+    <div class="invoice-section">
+        <div class="contacts-row">
+            <div class="contacts-group">
+                <h4>Dodavatel</h4>
+                <p><strong>Jméno dodavatele:</strong> {{ invoice.jmeno_dodavatele }}</p>
+                <p><strong>IČO dodavatele:</strong> {{ invoice.ico_dodavatele }}</p>
+                <p><strong>DIČ dodavatele:</strong> {{ invoice.dic_dodavatele }}</p>
+            </div>
+            <div class="contacts-group">
+                <h4>Odběratel</h4>
+                <p><strong>Jméno odběratele:</strong> {{ invoice.jmeno_odberatele }}</p>
+                <p><strong>IČO odběratele:</strong> {{ invoice.ico_odberatele }}</p>
+                <p><strong>DIČ odběratele:</strong> {{ invoice.dic_odberatele }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="invoice-section py-3">
+        <div class="contacts-row">
+            <div class="contacts-group">
+                <h4>Datumy</h4>
+                    <p><strong>Datum vystavení:</strong> <span id="datum-vystaveni">{{ invoice.datum_vystaveni }}</span></p>
+                    <p><strong>Datum splatnosti:</strong> <span id="datum-splatnosti">{{ invoice.datum_splatnosti }}</span></p>
+                    <p><strong>Datum UZP:</strong> <span id="datum-uzp">{{ invoice.datum_uzp }}</span></p>
+            </div>
+            <div class="contacts-group">
+                <h4>Platba</h4>
+        <p><strong>Číslo účtu:</strong> <span id="cislo-uctu">{{ invoice.cislo_uctu }}</span></p>
+        <p><strong>Měna:</strong> <span id="mena">{{ invoice.mena }}</span></p>
+        <p><strong>Variabilní symbol:</strong> <span id="variabilni-symbol">{{ invoice.variabilni_symbol }}</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="invoice-section my-3">
+        <h4>Úhrada</h4>
+        <div class="info-row">
+        <p><strong>Cena celkem bez DPH:</strong> <span id="price">{{ invoice.price }}</span></p>
+        <p><strong>DPH celkem:</strong> <span id="dph-celkem">{{ invoice.dph_celkem }}</span></p>
+        <p><strong>Zaokrouhlení:</strong> <span id="zaokrouhleni">{{ invoice.zaokrouhleni }}</span></p>
+        <p><strong>Cena celkem:</strong> <span id="cena-celkem">{{ invoice.cena_celkem }}</span></p>
+        <p><strong>RPDP:</strong> <span id="rpdp">{{ invoice.rpdp }}</span></p>
+        </div>
+    </div>
+
+    <div class="invoice-section py-3">
+        <div class="contacts-row">
+            <div class="contacts-group">
+                <h4>Položky 21 %</h4>
+        <p><strong>Vč. DPH 21%:</strong> <span id="vc-dph-21">{{ invoice.vc_dph_21 }}</span></p>
+        <p><strong>Bez DPH 21%:</strong> <span id="bez-dph-21">{{ invoice.bez_dph_21 }}</span></p>
+        <p><strong>DPH 21%:</strong> <span id="dph-21">{{ invoice.dph_21 }}</span></p>
+            </div>
+            <div class="contacts-group">
+                <h4>Položky 12 %</h4>
+
+                        <p><strong>DPH 12%:</strong> <span id="dph-12">{{ invoice.dph_12 }}</span></p>
+        <p><strong>Vč. DPH 12%:</strong> <span id="vc-dph-12">{{ invoice.vc_dph_12 }}</span></p>
+        <p><strong>Bez DPH 12%:</strong> <span id="bez-dph-12">{{ invoice.bez_dph_12 }}</span></p>
+            </div>
+
+                       <div class="contacts-group">
+                <h4>Položky 0 %</h4>
+        <p><strong>Bez DPH 0%:</strong> <span id="bez-dph-0">{{ invoice.bez_dph_0 }}</span></p>
+        <p><strong>DPH 0%:</strong> <span id="dph-0">{{ invoice.dph_0 }}</span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    </div>
+</div>
+{% endblock content %}
