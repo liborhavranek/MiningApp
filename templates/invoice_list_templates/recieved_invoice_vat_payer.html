@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <h1 class="py-5 text-center">Seznam přijatých faktur plátce DPH</h1>
+
+        <div class="col-md-10">
+            <div class="table-responsive">
+
+                <table class="table rounded-5">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Název faktury</th>
+                          <th scope="col">Datum vystavení</th>
+                          <th scope="col">Cena celkem</th>
+                          <th scope="col">Testovat</th>
+                          <th scope="col">Prohlédnout</th>
+                          <th scope="col">Editovat</th>
+                            <th scope="col">Smazat</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for invoice in invoices %}
+                        <tr>
+                          <td>{{ invoice.id }}</td>
+                          <td>{{ invoice.nazev_faktury }}</td>
+                          <td>{{ invoice.datum_vystaveni }}</td>
+                          <td>{{ invoice.cena_celkem }}</td>
+                          <td>
+
+                          </td>
+
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

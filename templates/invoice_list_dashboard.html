@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid" id="myDiv">
+    <h1 class="py-5 text-center">Seznamy faktur</h1> <br>
+    <div class="button-container">
+
+        <a href="#" class="btn btn-load-invoice disabled">Faktura vystavená - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Faktura vystavená - neplátce</a>
+        <a href="/recived_invoice_vat_payer_list" class="btn btn-load-invoice">Faktura přijatá - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Faktura přijatá - neplátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Pokladna příjem - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled" >Pokladna příjem - neplátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Pokladna výdej - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Pokladna výdej- neplátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Obecný příjem - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Obecný příjem - neplátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Obecný výdej - plátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Obecný výdej- neplátce</a>
+        <a href="#" class="btn btn-load-invoice disabled">Hromadné dokaldy </a>
+
+
+    </div>
+</div>
+
+{% endblock content %}

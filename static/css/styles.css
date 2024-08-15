@@ -57,6 +57,29 @@ nav.navbar.hidden {
     color: #ffffff; /* Bílé texty při najetí myší */
 }
 
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Mezera mezi tlačítky */
+}
+
+.btn-load-invoice {
+    padding: 25px 50px; /* Velikost paddingu tlačítka */
+    font-size: 1.25rem; /* Zvýšená velikost písma */
+    border: 2px solid #0f172a; /* Tmavě modrý okraj pro tlačítka */
+    background-color: transparent; /* Průhledné pozadí */
+    color: #0f172a; /* Tmavě modrý text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: calc(100% / 3 - 20px); /* Šířka tlačítek, zajišťuje rovnoměrné rozložení na 3 tlačítka v řadě, minus mezera */
+    text-align: center; /* Zarovnání textu na střed */
+    display: inline-block; /* Potřebné pro dynamickou šířku podle textu */
+}
+
+.btn-load-invoice:hover {
+    background-color: #0f172a; /* Tmavě modré pozadí při najetí myší */
+    color: #ffffff; /* Bílé texty při najetí myší */
+}
+
 .container-fluid {
     padding: 0 250px;
 }
