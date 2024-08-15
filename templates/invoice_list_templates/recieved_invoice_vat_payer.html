@@ -30,11 +30,17 @@
 
                                 <td><button class="btn btn-custom btn-testovat"><i class="fas fa-flag"></i> Testovat</button></td>
                                 <td>
-                                    <a href="{{ url_for('invoice_list_blueprint.invoice_page', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
+                                    <a href="{{ url_for('invoice_list_blueprint.recieve_invoice_vat_payer_template', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
                                         <i class="fas fa-eye"></i> Prohlédnout
                                     </a>
                                 </td>
-                            <td><button class="btn btn-custom btn-editovat"><i class="fas fa-edit"></i> Editovat</button></td>
+
+                                <td>
+                                    <a href="{{ url_for('edit_invoice_blueprint.edit_recived_invoice_vat_payer', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
+                                        <i class="fas fa-eye"></i> Editovat
+                                    </a>
+                                </td>
+
                             <td><button class="btn btn-custom btn-smazat"><i class="fas fa-trash"></i> Smazat</button></td>
                         </tr>
                         {% endfor %}

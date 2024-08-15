@@ -178,10 +178,13 @@ with app.app_context():
 from Blueprints.dashboard.dashboard import dashboard_blueprint
 from Blueprints.load_invoices.load_invoices import load_invoice_blueprint
 from Blueprints.invoice_list.invoice_list import invoice_list_blueprint
+from Blueprints.edit_invoices.edit_invoices import edit_invoice_blueprint
+
 
 app.register_blueprint(dashboard_blueprint)
 app.register_blueprint(load_invoice_blueprint)
 app.register_blueprint(invoice_list_blueprint)
+app.register_blueprint(edit_invoice_blueprint)
 
 if __name__ == '__main__':
     app.run(port=5003, debug=True)

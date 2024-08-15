@@ -16,6 +16,6 @@ def recived_invoices_vat_payer_list():
 
 
 @invoice_list_blueprint.route('/recieve_invoice_vat_payer_template/<int:id>', methods=['GET', 'POST'])
-def invoice_page(id):
+def recieve_invoice_vat_payer_template(id):
     invoice = RecivedInvoiceVATPayer.query.get_or_404(id)
     return render_template("show_invoice_template/recieve_invoice_vat_payer_template.html", invoice=invoice)

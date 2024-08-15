@@ -1,32 +1,43 @@
+/* Hlavní kontejner pro detaily faktury */
 .invoice-details {
-        padding-left: 15%; /* adjust as needed */
-        padding-right: 15%; /* adjust as needed */
-    }
+    padding: 20px;
+    background: radial-gradient(circle at top left, rgba(29, 42, 61, 0.7), rgba(29, 42, 61, 0.9) 70%);
+    border-radius: 8px;
+    color: #ffffff;
+}
 
-    .info-row {
+/* Styl pro jednotlivé sekce faktury */
+.invoice-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #ffffff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+}
+
+/* Styl pro podsekce */
+.subsection-title {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Styl pro řádky informací */
+.info-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Odstup mezi jednotlivými položkami */
+    gap: 20px;
 }
 
-.info-row span {
-    flex: 1; /* Umožňuje roztažení položek na stejné šířce */
+.info-column {
+    flex: 1;
 }
 
-.contacts-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Odstup mezi bloky */
-}
-
-.contacts-group {
-    flex: 1; /* Umožňuje blokům rovnoměrné rozložení */
-}
-
-.contacts-group h4 {
-    margin-bottom: 10px;
-}
-
-.contacts-group p {
-    margin: 5px 0;
+/* Styl pro pruhování při hoveru, pokud je potřeba */
+.invoice-section:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
