@@ -83,3 +83,152 @@ nav.navbar.hidden {
 .container-fluid {
     padding: 0 250px;
 }
+
+
+
+/* Styl pro pozadí formuláře s barevným gradientem v oblastech */
+.form-div-color {
+    background: radial-gradient(circle at top left, rgba(29, 42, 61, 0.7), rgba(29, 42, 61, 0.9) 70%); /* Jemný gradient */
+    padding: 20px; /* Padding pro lepší vzhled */
+    border-radius: 8px; /* Zaoblené rohy */
+    color: #ffffff; /* Bíla barva textu pro kontrast */
+    border: 1px solid #0f172a; /* Stejná barva jako menu pro sjednocení */
+}
+
+/* Styl pro inputy v rámci formuláře */
+.form-group input.form-control {
+    background-color: transparent; /* Transparentní pozadí */
+    color: #ffffff; /* Bíla barva textu */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Světlejší okraj pro jemný kontrast */
+    border-radius: 4px; /* Zaoblené rohy inputů */
+    padding: 10px 15px; /* Padding pro pohodlné psaní */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3); /* Jemný vnitřní stín pro efekt hloubky */
+}
+
+/* Styl pro inputy při focusu */
+.form-group input.form-control:focus {
+    border-color: rgba(255, 255, 255, 0.5); /* Trochu světlejší okraj při focusu */
+    outline: none; /* Odstranit defaultní outline */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* Světlejší stín pro zvýraznění */
+}
+
+/* Styl pro placeholder text */
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Světlejší šedá pro placeholder text, kontrastní k tmavému pozadí */
+}
+
+.submit-invoice-button {
+    background-color: #0f172a; /* Tmavě modrá barva pozadí */
+    color: #ffffff; /* Bíla barva textu */
+    border: none; /* Bez okrajů */
+    border-radius: 50px; /* Zaoblené rohy, styl pilulky */
+    font-size: 16px; /* Velikost písma */
+    font-weight: bold; /* Tučné písmo pro lepší čitelnost */
+    padding: 10px 200px; /* Padding pro pohodlné kliknutí */
+    transition: background-color 0.3s ease; /* Plynulý přechod pro změnu barvy */
+    display: inline-flex; /* Flexbox pro lepší zarovnání textu a ikony */
+    align-items: center; /* Vertikální zarovnání textu a ikony */
+}
+
+/* Styl pro ikonku uvnitř tlačítka */
+.submit-invoice-button i {
+    margin-right: 8px; /* Mezery mezi ikonou a textem */
+}
+
+/* Styl při hover efektu */
+.submit-invoice-button:hover {
+    background-color: #1a243a; /* Světlejší tmavě modrá pro hover efekt */
+}
+
+
+
+
+/* Styl pro tabulku */
+.table-custom {
+    background: transparent; /* Transparentní pozadí tabulky */
+    color: #ffffff; /* Bíla barva textu */
+    border-radius: 8px; /* Zaoblené rohy tabulky */
+    overflow: hidden; /* Skrytí obsahu přesahující hranice tabulky */
+    border: none; /* Bez okrajů kolem tabulky */
+}
+
+/* Styl pro hlavičku tabulky */
+.table-custom thead {
+    background: transparent; /* Transparentní pozadí buněk */
+    color: #ffffff; /* Bíla barva textu */
+    padding: 10px; /* Padding pro pohodlné čtení */
+    vertical-align: middle; /* Vertikální zarovnání textu uprostřed */
+}
+
+/* Styl pro buňky hlavičky tabulky */
+.table-custom th {
+    background: transparent;
+    color: #ffffff; /* Bíla barva textu */
+    padding: 12px; /* Padding pro pohodlné čtení */
+    text-align: left; /* Zarovnání textu vlevo */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Světlejší okraj mezi hlavičkami */
+}
+
+/* Styl pro řádky tabulky */
+.table-custom tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Jemný okraj mezi řádky */
+}
+
+/* Styl pro buňky tabulky */
+.table-custom td {
+    background: transparent; /* Transparentní pozadí buněk */
+    color: #ffffff; /* Bíla barva textu */
+    padding: 10px; /* Padding pro pohodlné čtení */
+    vertical-align: middle; /* Vertikální zarovnání textu uprostřed */
+}
+
+/* Styl pro řádky při hover efektu */
+.table-custom tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Jemné zvýraznění při hoveru */
+}
+
+/* Styl pro tabulku, aby se přizpůsobila responsivně */
+.table-responsive .table-custom {
+    border-collapse: collapse; /* Bez mezery mezi buňkami */
+}
+
+
+/* Styl pro tlačítka v tabulce */
+.table-custom .btn-custom {
+    background: transparent; /* Transparentní pozadí tlačítka */
+    color: #ffffff; /* Bíla barva textu */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Jemný okraj */
+    border-radius: 4px; /* Zaoblené rohy */
+    padding: 6px 12px; /* Padding pro pohodlné používání */
+    font-size: 14px; /* Velikost písma */
+    font-weight: bold; /* Tučné písmo pro lepší čitelnost */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Plynulý přechod */
+}
+
+/* Styl pro tlačítka při hover efektu */
+.table-custom .btn-custom:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Jemné zvýraznění pozadí při hoveru */
+    border-color: rgba(255, 255, 255, 0.5); /* Světlejší okraj při hoveru */
+}
+
+/* Styl pro tlačítka různých akcí */
+.btn-testovat {
+    color: #00bcd4; /* Modrá barva pro "Testovat" */
+}
+
+.btn-editovat {
+    color: #4caf50; /* Zelená barva pro "Editovat" */
+}
+
+.btn-smazat {
+    color: #f44336; /* Červená barva pro "Smazat" */
+}
+
+.btn-prohlednout {
+    color: #ffeb3b; /* Žlutá barva pro "Prohlédnout" */
+}
+
+/* Styl pro ikony v tlačítkách */
+.table-custom .btn-custom i {
+    margin-right: 5px; /* Mezery mezi ikonou a textem */
+}

@@ -13,3 +13,9 @@ def dashboard():
 def recived_invoices_vat_payer_list():
     invoices = RecivedInvoiceVATPayer.query.all()
     return render_template("invoice_list_templates/recieved_invoice_vat_payer.html", invoices=invoices)
+
+
+@invoice_list_blueprint.route('/recieve_invoice_vat_payer_template/<int:id>', methods=['GET', 'POST'])
+def invoice_page(id):
+    invoice = RecivedInvoiceVATPayer.query.get_or_404(id)
+    return render_template("show_invoice_template/recieve_invoice_vat_payer_template.html", invoice=invoice)

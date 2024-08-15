@@ -2,37 +2,40 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-center">
+        <div class="row justify-content-center rounded-4 form-div-color my-5">
         <h1 class="py-5 text-center">Seznam přijatých faktur plátce DPH</h1>
 
         <div class="col-md-10">
             <div class="table-responsive">
-
-                <table class="table rounded-5">
-                      <thead>
+                <table class="table table-custom">
+                    <thead>
                         <tr>
-                          <th scope="col">ID</th>
-                          <th scope="col">Název faktury</th>
-                          <th scope="col">Datum vystavení</th>
-                          <th scope="col">Cena celkem</th>
-                          <th scope="col">Testovat</th>
-                          <th scope="col">Prohlédnout</th>
-                          <th scope="col">Editovat</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Název faktury</th>
+                            <th scope="col">Datum vystavení</th>
+                            <th scope="col">Cena celkem</th>
+                            <th scope="col">Testovat</th>
+                            <th scope="col">Prohlédnout</th>
+                            <th scope="col">Editovat</th>
                             <th scope="col">Smazat</th>
                         </tr>
-                      </thead>
-                      <tbody>
+                    </thead>
+                    <tbody>
                         {% for invoice in invoices %}
                         <tr>
-                          <td>{{ invoice.id }}</td>
-                          <td>{{ invoice.nazev_faktury }}</td>
-                          <td>{{ invoice.datum_vystaveni }}</td>
-                          <td>{{ invoice.cena_celkem }}</td>
-                          <td>
+                            <td>{{ invoice.id }}</td>
+                            <td>{{ invoice.nazev_faktury }}</td>
+                            <td>{{ invoice.datum_vystaveni }}</td>
+                            <td>{{ invoice.cena_celkem }}</td>
 
-                          </td>
-
-
+                                <td><button class="btn btn-custom btn-testovat"><i class="fas fa-flag"></i> Testovat</button></td>
+                                <td>
+                                    <a href="{{ url_for('invoice_list_blueprint.invoice_page', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
+                                        <i class="fas fa-eye"></i> Prohlédnout
+                                    </a>
+                                </td>
+                            <td><button class="btn btn-custom btn-editovat"><i class="fas fa-edit"></i> Editovat</button></td>
+                            <td><button class="btn btn-custom btn-smazat"><i class="fas fa-trash"></i> Smazat</button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -41,5 +44,4 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}

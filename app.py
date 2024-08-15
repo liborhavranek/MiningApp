@@ -29,12 +29,7 @@ with app.app_context():
 
 
 
-#
-# @app.route('/invoicepage/<int:id>', methods=['GET', 'POST'])
-# def invoice_page(id):
-#     invoice = Invoice.query.get_or_404(id)
-#     return render_template("invoice_page.html", invoice=invoice)
-#
+
 #
 # @app.route('/delete_invoice/<int:id>', methods=['POST'])
 # def delete_invoice(id):
