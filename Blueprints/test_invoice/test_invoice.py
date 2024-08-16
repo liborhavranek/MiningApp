@@ -132,24 +132,19 @@ def send_file_recieved_vat_payer_invoice(id):
             'ID': 'Číslo dokladu',
             'TYPE': 'Typ',
             'SUPPLIER_ADDRESS': 'Adresa Odběratele',
+            'SUPPLIER_NAME': 'Jméno odběratele',
             'IC_SUPPLIER': 'IČO dodavatele',
             'DIC_SUPPLIER': 'DIČ dodavatele',
-            'IC_CUSTOMER': 'IČO odběratele',
-            'DIC_CUSTOMER': 'DIČ odběratele',
+            'ACCOUNT_NUMBER': 'Číslo účtu',
             'VARIABLE_SYMBOL': 'Variabilní symbol ',
             'PUBLICATION_DATE': 'Datum vystavení',
             'TAX_POINT': 'Datum UZP',
             'DUE_DATE': 'Datum splatnosti',
-            'ACCOUNT_NUMBER': 'Číslo účtu',
-            'PRICE_INCLUDING_VAT': 'Cena včetně DPH',
-            'PRICE_WITHOUT_VAT': 'Cena bez DPH',
-            'VAT_AMOUNT': 'DPH',
+            'PAYMENT_METHOD': 'Platební metoda',
             'CURRENCY': 'Měna',
-            'SUPPLIER_EVIDENCE_NUMBER': 'Evidenční číslo odběratele',
             'IS_DEFERRED_TAX': 'RPDP',
             'BANK_ACCOUNT': 'Číslo účtu',
-            'ICO_SUPPLIER': 'IČO dodavatele',
-            'CIN_SUPPLIER': 'IČO dodavatele',
+
         }
 
         return render_template('results.html', json_data=result, key_descriptions=key_descriptions, invoice=invoice)
