@@ -28,7 +28,11 @@
                             <td>{{ invoice.datum_vystaveni }}</td>
                             <td>{{ invoice.cena_celkem }}</td>
 
-                                <td><button class="btn btn-custom btn-testovat"><i class="fas fa-flag"></i> Testovat</button></td>
+                                <td>
+                                    <a href="{{ url_for('test_invoice_blueprint.test_recieved_vat_payer_invoice', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
+                                        <i class="fas fa-eye"></i> Testovat
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{ url_for('invoice_list_blueprint.recieve_invoice_vat_payer_template', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
                                         <i class="fas fa-eye"></i> Prohlédnout
@@ -41,7 +45,11 @@
                                     </a>
                                 </td>
 
-                            <td><button class="btn btn-custom btn-smazat"><i class="fas fa-trash"></i> Smazat</button></td>
+                                                            <td>
+                                    <a href="{{ url_for('delete_invoice_blueprint.delete_invoice_recieved_invoice_vat_payer', id=invoice.id) }}" class="btn btn-custom btn-prohlednout">
+                                        <i class="fas fa-eye"></i> Smazat
+                                    </a>
+                                </td>
                         </tr>
                         {% endfor %}
                     </tbody>

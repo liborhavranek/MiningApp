@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" id="myDiv">
+    <div class="row justify-content-center rounded-4 form-div-color my-5">
+        <div class="form-container " id="form-container">
+            <h1 class="py-5 text-center">Testování faktury {{ invoice.id }}</h1>
+
+            <!-- Formulář pro odeslání dat -->
+
+<form id="invoiceForm" method="post" action="{{ url_for('test_invoice_blueprint.send_file_recieved_vat_payer_invoice', id=invoice.id) }}" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="prompt">Prompt:</label>
+        <textarea name="prompt" rows="15" cols="150" class="form-control" placeholder="Prompt..." required>
+Write down information from the document in the following json format only and exactly. No text before json.
+If the information is not present, write null on the place of the value. If there is not a price for the whole document, write null in place of price with/without vat, prices should be in the format 1500.00 (no spaces or commas or currency) and have number type, not string. All other things should be strings or bools.
+
+{
+   "SUPPLIER_NAME": "JMENO_DODAVATELE",
+   "SUPPLIER_ADDRESS": "ADRESA DODAVATELE",
+   "IC_SUPPLIER": "IČ DODAVATELE",
+   "DIC_SUPPLIER": "DIČ DODAVATELE",
+   "ACCOUNT_NUMBER": "BANK UCET",
+   "PUBLICATION_DATE": "DATUM VYSTAVENI",
+   "TAX_POINT": "DATUM UZP",
+   "DUE_DATE": "DATUM SPLATNOSTI",
+   "VARIABLE_SYMBOL": "VARIABILNI SYMBOL",
+   "PAYMENT_METHOD": "PLATEBNI METODA",
+   "CURRENCY": "MENA",
+   "TYPE": "TYP_DOKUMENTU",
+   "IS_DEFERRED_TAX": "RPDP",
+   "ROUNDING": "ZAOKROUHLENI",
+   "ID": "ID",
+   "VAT_TABLE": [
+       {
+           "VAT_RATE": "DPH POLOZKY CELKEM",
+           "PRICE_INCLUDING_VAT": "CENA CELKEM S DPH POLOZKY CELKEM",
+           "PRICE_WITHOUT_VAT": "CENA CELKEM BEZ DPH POLOZKY CELKEM",
+           "VAT_AMOUNT": "DPH POLOZKY CELKEM"
+       }, ...
+   ]
+}
+
+        </textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <select name="model" class="form-control" required>
+            <option value="gpt-4o">GPT-4o</option>
+            <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+        </select>
+    </div>
+
+    <div class="form-group text-center py-3">
+        <input type="submit" class="btn submit-invoice-button" value="Send Data">
+    </div>
+</form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

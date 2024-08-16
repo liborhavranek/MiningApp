@@ -65,4 +65,4 @@ def edit_recived_invoice_vat_payer(id):
 
         return redirect(url_for('invoice_list_blueprint.recived_invoices_vat_payer_list'))
 
-    return render_template("edit_invoices_templates/edit_invoice.html", invoice=invoice)
+    return render_template("edit_invoices_templates/edit_recieved_invoice_vat_payer.html", invoice=invoice)

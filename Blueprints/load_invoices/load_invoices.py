@@ -3,7 +3,7 @@ import hashlib
 from extensions import db
 from datetime import datetime
 from werkzeug.utils import secure_filename
-from flask import Blueprint, current_app, render_template, request
+from flask import Blueprint, current_app, render_template, request, redirect, url_for
 from models.recived_invoice_model import RecivedInvoiceVATPayer
 
 load_invoice_blueprint = Blueprint('load_invoice_blueprint', __name__, template_folder='templates')
@@ -95,6 +95,6 @@ def upload_recived_invoice_vat_payer():
             with open(os.path.join(current_app.config['UPLOAD_FOLDER'], filename), 'wb') as f:
                 f.write(file_data)
 
-            return render_template("index.html")
+            return redirect(url_for('invoice_list_blueprint.recived_invoices_vat_payer_list'))
 
     return render_template("load_invoices_forms_templates/load_recived_invoice_vat_payer.html")
