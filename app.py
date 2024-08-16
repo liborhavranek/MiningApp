@@ -6,8 +6,6 @@ from models.recived_invoice_model import RecivedInvoiceVATPayer
 app = Flask(__name__)
 
 app.secret_key = "secret_key"
-# TODO Adresa api je změněná, abych mohl testovat data bez napojení na api
-API_URL = "https://documents-ai.netglade.cz/process-documentsss"
 UPLOAD_FOLDER = 'uploads'
 
 # Konfigurace SQLAlchemy

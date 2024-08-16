@@ -38,23 +38,36 @@
             <h2>Vytěžené údaje z faktury</h2>
             <dl class="row">
                 {% for key, description in key_descriptions.items() %}
-                    {% if json_data.result[key] %}
-                        <dt class="col-sm-4">{{ description }}</dt>
-                        <dd class="col-sm-8">{{ json_data.result[key] | safe }}</dd>
-                    {% endif %}
+                    {% set value = json_data.get(key, None) %}
+                    <dt class="col-sm-4">{{ description }}</dt>
+                    <dd class="col-sm-8">{{ value if value is not none else 'null' }}</dd>
                 {% endfor %}
+            </dl>
 
 
-
-<!--                {% for vat_entry in json_data.result.VAT_TABLE %}-->
-<!--                    <tr>-->
-<!--                        Musím úplně předělat jestli budeme chtít i položky -->
-<!--                        <td>{{ vat_entry.PRICE_INCLUDING_VAT }}</td>-->
-<!--                        <td>{{ vat_entry.PRICE_WITHOUT_VAT }}</td>-->
-<!--                        <td>{{ vat_entry.VAT_AMOUNT }}</td>-->
-<!--                        <td>{{ vat_entry.VAT_RATE }}</td>-->
-<!--                    </tr>-->
-<!--                    {% endfor %}-->
+{% if 'VAT_TABLE' in json_data %}
+    <h4>VAT Table</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>VAT Rate</th>
+                <th>Price Including VAT</th>
+                <th>Price Without VAT</th>
+                <th>VAT Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vat_entry in json_data['VAT_TABLE'] %}
+                <tr>
+                    <td>{{ vat_entry['VAT_RATE'] }}</td>
+                    <td>{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
+                    <td>{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
+                    <td>{{ vat_entry['VAT_AMOUNT'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
             </dl>
         </div>
         <div class="col-md-6">
@@ -120,34 +133,33 @@
     </div>
 
 
-  <dl class="row">
-                <!-- Porovnání ID -->
-                <dt class="col-sm-4">Variabilní symbol</dt>
-                <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
-                <dt class="col-sm-4">Variabilní symbol(JSON)</dt>
-                <dd class="col-sm-8">
-                    {{ json_data.result.VARIABLE_SYMBOL }}
-                    {% if json_data.result.VARIABLE_SYMBOL == invoice.variabilni_symbol %}
-                        (Shoduje se)
-                    {% else %}
-                        (Neshoduje se)
-                    {% endif %}
-                </dd>
+<dl class="row">
+    <!-- Porovnání Variabilní symbol -->
+    <dt class="col-sm-4">Variabilní symbol</dt>
+    <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
+    <dt class="col-sm-4">Variabilní symbol (JSON)</dt>
+    <dd class="col-sm-8">
+        {{ json_data.get('VARIABLE_SYMBOL', 'N/A') }}
+        {% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}
+            (Shoduje se)
+        {% else %}
+            (Neshoduje se)
+        {% endif %}
+    </dd>
 
-                <!-- Další porovnání -->
-                <dt class="col-sm-4">IČ dodavatele</dt>
-                <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
-                <dt class="col-sm-4">IČ dodavatele (JSON)</dt>
-                <dd class="col-sm-8">
-                    {{ json_data.result.IC_SUPPLIER }}
-                    {% if json_data.result.IC_SUPPLIER == invoice.ico_dodavatele %}
-                        (Shoduje se)
-                    {% else %}
-                        (Neshoduje se)
-                    {% endif %}
-                </dd>
-
-            </dl>
+    <!-- Další porovnání -->
+    <dt class="col-sm-4">IČ dodavatele</dt>
+    <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
+    <dt class="col-sm-4">IČ dodavatele (JSON)</dt>
+    <dd class="col-sm-8">
+        {{ json_data.get('IC_SUPPLIER', 'N/A') }}
+        {% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}
+            (Shoduje se)
+        {% else %}
+            (Neshoduje se)
+        {% endif %}
+    </dd>
+</dl>
 </div>
 </div>
 
