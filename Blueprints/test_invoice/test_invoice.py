@@ -131,6 +131,7 @@ def send_file_recieved_vat_payer_invoice(id):
         key_descriptions = {
             'ID': 'Číslo dokladu',
             'TYPE': 'Typ',
+            'SUPPLIER_ADDRESS': 'Adresa Odběratele',
             'IC_SUPPLIER': 'IČO dodavatele',
             'DIC_SUPPLIER': 'DIČ dodavatele',
             'IC_CUSTOMER': 'IČO odběratele',

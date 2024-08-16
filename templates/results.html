@@ -1,21 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container-fluid" id="myDiv">
+    <div class="row justify-content-center rounded-4 form-div-color my-5">
 <div class="container-fluid">
-    <h1 class="py-5 text-center">Výsledky</h1>
+    <h1 class="py-2 text-center">Výsledky pro faktura čslo {{ invoice.id }}</h1> <br>
+        <h3 class="py-2 text-center">{{ invoice.nazev_faktury }}</h3>
 
     <div class="row">
-        <div class="col-md-4">
-            <h2>Data z JSON</h2>
-            <pre>{{ json_data | tojson(indent=2) }}</pre> <!-- Zobrazí JSON formátovaný s odsazením -->
+   <div class="col-md-12">
+        <h4 class="py-2">Data z JSON</h4>
+        <!-- Tlačítko pro zobrazení/skrytí JSON -->
+        <button id="toggleJsonButton" class="submit-invoice-button mb-5">Zobrazit JSON</button>
+
+        <!-- Div pro JSON data -->
+        <div id="jsonData">
+            <pre>{{ json_data | tojson(indent=2) | safe }}</pre>
         </div>
-        <div class="col-md-4">
+    </div>
+
+    <script>
+        // JavaScript pro přepínání viditelnosti JSON data
+        document.getElementById('toggleJsonButton').addEventListener('click', function() {
+            var jsonDataDiv = document.getElementById('jsonData');
+            var button = document.getElementById('toggleJsonButton');
+
+            if (jsonDataDiv.style.display === 'none') {
+                jsonDataDiv.style.display = 'block';
+                button.textContent = 'Skrýt JSON'; // Změna textu tlačítka
+            } else {
+                jsonDataDiv.style.display = 'none';
+                button.textContent = 'Zobrazit JSON'; // Změna textu tlačítka
+            }
+        });
+    </script>
+        <div class="col-md-6">
             <h2>Vytěžené údaje z faktury</h2>
             <dl class="row">
                 {% for key, description in key_descriptions.items() %}
                     {% if json_data.result[key] %}
                         <dt class="col-sm-4">{{ description }}</dt>
-                        <dd class="col-sm-8">{{ json_data.result[key] }}</dd>
+                        <dd class="col-sm-8">{{ json_data.result[key] | safe }}</dd>
                     {% endif %}
                 {% endfor %}
 
@@ -32,7 +57,7 @@
 <!--                    {% endfor %}-->
             </dl>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2>Skutečné údaje na faktuře </h2>
 
 
@@ -123,8 +148,8 @@
                 </dd>
 
             </dl>
-
-
+</div>
+</div>
 
 </div>
 {% endblock content %}

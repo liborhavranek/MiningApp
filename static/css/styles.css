@@ -232,3 +232,7 @@ nav.navbar.hidden {
 .table-custom .btn-custom i {
     margin-right: 5px; /* Mezery mezi ikonou a textem */
 }
+
+        #jsonData {
+            display: none;
+        }
