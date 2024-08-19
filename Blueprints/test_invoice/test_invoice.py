@@ -152,40 +152,20 @@ def send_file_recieved_vat_payer_invoice(id):
             'VAT_AMOUNT': 'Výše DPH'
         }
 
-        # Porovnání výsledků a příprava dat pro šablonu
-        comparison_results = []
-        for key, description in key_descriptions.items():
-            # Pro hlavní položky faktury
-            invoice_value = getattr(invoice, key.lower(), None)
-            json_value = standardized_result.get(key, 'null')
-            match = invoice_value == json_value
-            comparison_results.append({
-                'description': description,
-                'invoice_value': invoice_value,
-                'json_value': json_value,
-                'match': match
-            })
 
-        # Porovnání pro VAT table
-        if 'VAT_TABLE' in standardized_result:
-            for index, vat_entry in enumerate(standardized_result['VAT_TABLE']):
-                for vat_key, vat_description in key_descriptions.items():
-                    if vat_key in ['VAT_RATE', 'PRICE_INCLUDING_VAT', 'PRICE_WITHOUT_VAT', 'VAT_AMOUNT']:
-                        invoice_vat_value = None  # Zde byste měli získat odpovídající hodnotu z invoice, pokud existuje
-                        json_vat_value = vat_entry.get(vat_key, 'null')
-                        match = invoice_vat_value == json_vat_value
-                        comparison_results.append({
-                            'description': f"{vat_description} (záznam {index + 1})",
-                            'invoice_value': invoice_vat_value,
-                            'json_value': json_vat_value,
-                            'match': match
-                        })
+        # Vytiskne evidenční číslo z objektu invoice
+        print("Evidenční číslo z invoice:", invoice.evidencni_cislo)
 
-        print(comparison_results)
+        # Vytiskne ID z extrahovaných dat ve standardized_result
+        print("ID z extrahovaných dat:", standardized_result['ID'])
+
+        # Porovnání hodnot a vytiskne výsledek
+        result = invoice.evidencni_cislo == standardized_result['ID']
+        print("Výsledek porovnání:", result)
+
         return render_template('results.html',
                                result=result,
                                json_data=standardized_result,
-                               comparison_results=comparison_results,
                                key_descriptions=key_descriptions,
                                invoice=invoice)
 

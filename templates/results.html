@@ -327,12 +327,12 @@
                 </tr>
 
             <!-- Porovnání Zaokrouhlení -->
-                <tr class="{% if (not invoice.zaokrouhleni and json_data.get('ROUNDING') in [None, '', 'N/A', 0, '0']) or (json_data.get('ROUNDING') == invoice.zaokrouhleni) %}text-success{% else %}text-danger{% endif %}">
+                <tr class="{% if (invoice.zaokrouhleni == json_data.get('ROUNDING') or (invoice.zaokrouhleni in [None, '', 'N/A', 0, '0'] and json_data.get('ROUNDING') in [None, '', 'N/A', 0, '0'])) %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">Zaokrouhlení</th>
-                    <td class="col-sm-3">{{ invoice.zaokrouhleni }}</td>
-                    <td class="col-sm-3">{{ json_data.get('ROUNDING', 'N/A') }}</td>
+                    <td class="col-sm-3">{{ invoice.zaokrouhleni if invoice.zaokrouhleni not in [None, '', 'null', 0, '0'] else 'N/A' }}</td>
+                    <td class="col-sm-3">{{ json_data.get('ROUNDING', 'N/A') if json_data.get('ROUNDING') not in [None, '', 'null', 'N/A', 0, '0'] else 'N/A' }}</td>
                     <td class="col-sm-3">
-                        {% if (not invoice.zaokrouhleni and json_data.get('ROUNDING') in [None, '', 'N/A', 0, '0']) or (json_data.get('ROUNDING') == invoice.zaokrouhleni) %}
+                        {% if (invoice.zaokrouhleni == json_data.get('ROUNDING') or (invoice.zaokrouhleni in [None, '', 'null', 'N/A', 0, '0'] and json_data.get('ROUNDING') in [None, '', 'null', 'N/A', 0, '0'])) %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
