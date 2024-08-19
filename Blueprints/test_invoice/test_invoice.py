@@ -181,6 +181,7 @@ def send_file_recieved_vat_payer_invoice(id):
                             'match': match
                         })
 
+        print(comparison_results)
         return render_template('results.html',
                                result=result,
                                json_data=standardized_result,

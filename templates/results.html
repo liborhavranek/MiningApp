@@ -349,31 +349,37 @@
                     <td class="col-sm-3">{{ invoice.vc_dph_21 }}</td>
                     <td class="col-sm-3">{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['PRICE_INCLUDING_VAT'].replace(',', '.') == invoice.vc_dph_21.replace(',', '.') %}
+                        {% set price_with_vat_invoice = invoice.vc_dph_21|replace(',', '.')|float %}
+                        {% set price_with_vat_entry = vat_entry['PRICE_INCLUDING_VAT']|replace(',', '.')|float %}
+                        {% if price_with_vat_entry == price_with_vat_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
                         {% endif %}
                     </td>
                 </tr>
-                <tr class="{% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_21.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                <tr class="{% if price_with_vat_entry == price_with_vat_invoice %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">Cena bez DPH 21 %</th>
                     <td class="col-sm-3">{{ invoice.bez_dph_21 }}</td>
                     <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_21.replace(',', '.') %}
+                        {% set price_without_vat_invoice = invoice.bez_dph_21|replace(',', '.')|float %}
+                        {% set price_without_vat_entry = vat_entry['PRICE_WITHOUT_VAT']|replace(',', '.')|float %}
+                        {% if price_without_vat_entry == price_without_vat_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
                         {% endif %}
                     </td>
                 </tr>
-                <tr class="{% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_21.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                <tr class="{% if vat_entry['VAT_AMOUNT']|replace(',', '.')|float == invoice.dph_21|replace(',', '.')|float %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">DPH 21 %</th>
                     <td class="col-sm-3">{{ invoice.dph_21 }}</td>
                     <td class="col-sm-3">{{ vat_entry['VAT_AMOUNT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_21.replace(',', '.') %}
+                        {% set vat_amount_invoice = invoice.dph_21|replace(',', '.')|float %}
+                        {% set vat_amount_entry = vat_entry['VAT_AMOUNT']|replace(',', '.')|float %}
+                        {% if vat_amount_entry == vat_amount_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
@@ -394,31 +400,37 @@
                     <td class="col-sm-3">{{ invoice.vc_dph_12 }}</td>
                     <td class="col-sm-3">{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['PRICE_INCLUDING_VAT'].replace(',', '.') == invoice.vc_dph_12.replace(',', '.') %}
+                        {% set price_with_vat_invoice = invoice.vc_dph_12|replace(',', '.')|float %}
+                        {% set price_with_vat_entry = vat_entry['PRICE_INCLUDING_VAT']|replace(',', '.')|float %}
+                        {% if price_with_vat_entry == price_with_vat_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
                         {% endif %}
                     </td>
                 </tr>
-                <tr class="{% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_12.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                <tr class="{% if price_without_vat_entry == price_without_vat_invoice %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">Cena bez DPH 12 %</th>
                     <td class="col-sm-3">{{ invoice.bez_dph_12 }}</td>
                     <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_12.replace(',', '.') %}
+                        {% set price_without_vat_invoice = invoice.bez_dph_12|replace(',', '.')|float %}
+                        {% set price_without_vat_entry = vat_entry['PRICE_WITHOUT_VAT']|replace(',', '.')|float %}
+                        {% if price_without_vat_entry == price_without_vat_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
                         {% endif %}
                     </td>
                 </tr>
-                <tr class="{% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_12.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                <tr class="{% if vat_entry['VAT_AMOUNT']|replace(',', '.')|float == invoice.dph_12|replace(',', '.')|float %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">DPH 12 %</th>
                     <td class="col-sm-3">{{ invoice.dph_12 }}</td>
                     <td class="col-sm-3">{{ vat_entry['VAT_AMOUNT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_12.replace(',', '.') %}
+                        {% set vat_amount_invoice = invoice.dph_12|replace(',', '.')|float %}
+                        {% set vat_amount_entry = vat_entry['VAT_AMOUNT']|replace(',', '.')|float %}
+                        {% if vat_amount_entry == vat_amount_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
@@ -431,16 +443,19 @@
 {% endif %}
 
 <!-- Porovnání pro 0% DPH -->
+<!-- Porovnání pro 0% DPH -->
 {% if invoice.bez_dph_0 %}
     {% if 'VAT_TABLE' in json_data %}
         {% for vat_entry in json_data['VAT_TABLE'] %}
-            {% if vat_entry['VAT_RATE'] == '0%' %}
-                <tr class="{% if vat_entry['VAT_RATE'] == '0%' %}text-success{% else %}text-danger{% endif %}">
+            {% if vat_entry['VAT_RATE'].strip('%')|float == 0 %}
+                <tr class="{% if vat_entry['VAT_RATE'].strip('%')|float == 0 %}text-success{% else %}text-danger{% endif %}">
                     <th class="col-sm-3">Cena bez DPH 0 %</th>
                     <td class="col-sm-3">{{ invoice.bez_dph_0 }}</td>
                     <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
                     <td class="col-sm-3">
-                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_0.replace(',', '.') %}
+                        {% set price_without_vat_invoice = invoice.bez_dph_0|replace(',', '.')|float %}
+                        {% set price_without_vat_entry = vat_entry['PRICE_WITHOUT_VAT']|replace(',', '.')|float %}
+                        {% if price_without_vat_entry == price_without_vat_invoice %}
                             <span class="badge bg-success">TRUE</span>
                         {% else %}
                             <span class="badge bg-danger">FALSE</span>
