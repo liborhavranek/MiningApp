@@ -49,21 +49,21 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="jmeno-dodavatele">Jméno dodavatele:</label>
-                                    <input type="text" class="form-control" id="jmeno-dodavatele" name="jmeno-dodavatele">
+                                    <input type="text" class="form-control" id="jmeno-dodavatele" name="jmeno-dodavatele" value="{{ invoice.jmeno_dodavatele}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="adresa-dodavatele">Adresa dodavatele:</label>
-                                    <input type="text" class="form-control" id="adresa-dodavatele" name="adresa-dodavatele">
+                                    <input type="text" class="form-control" id="adresa-dodavatele" name="adresa-dodavatele" value="{{ invoice.adresa_dodavatele}}">
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="ico-dodavatele">IČO dodavatele:</label>
-                                    <input type="text" class="form-control" id="ico-dodavatele" name="ico-dodavatele">
+                                    <input type="text" class="form-control" id="ico-dodavatele" name="ico-dodavatele" value="{{ invoice.ico_dodavatele}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="dic-dodavatele">DIČ dodavatele:</label>
-                                    <input type="text" class="form-control" id="dic-dodavatele" name="dic-dodavatele">
+                                    <input type="text" class="form-control" id="dic-dodavatele" name="dic-dodavatele" value="{{ invoice.dic_dodavatele}}">
                                 </div>
                                 </div>
                             </div>
@@ -75,17 +75,17 @@
                                 <div class="col-md-6">
                                  <div class="form-group">
                                     <label for="datum-vystaveni">Datum vystavení:</label>
-                                    <input type="date" class="form-control" id="datum-vystaveni" name="datum-vystaveni">
+                                    <input type="date" class="form-control" id="datum-vystaveni" name="datum-vystaveni" value="{{ invoice.datum_vystaveni}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="datum-splatnosti">Datum splatnosti:</label>
-                                    <input type="date" class="form-control" id="datum-splatnosti" name="datum-splatnosti">
+                                    <input type="date" class="form-control" id="datum-splatnosti" name="datum-splatnosti" value="{{ invoice.datum_splatnosti}}">
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="datum-uzp">Datum UZP:</label>
-                                        <input type="date" class="form-control" id="datum-uzp" name="datum-uzp">
+                                        <input type="date" class="form-control" id="datum-uzp" name="datum-uzp" value="{{ invoice.datum_uzp}}">
                                     </div>
                                 </div>
                             </div>
@@ -97,21 +97,21 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cislo-uctu">Číslo účtu:</label>
-                                    <input type="text" class="form-control" id="cislo-uctu" name="cislo-uctu">
+                                    <input type="text" class="form-control" id="cislo-uctu" name="cislo-uctu" value="{{ invoice.cislo_uctu}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="mena">Měna:</label>
-                                    <input type="text" class="form-control" id="mena" name="mena">
+                                    <input type="text" class="form-control" id="mena" name="mena" value="{{ invoice.mena}}">
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="variabilni-symbol">Variabilní symbol:</label>
-                                        <input type="text" class="form-control" id="variabilni-symbol" name="variabilni-symbol">
+                                        <input type="text" class="form-control" id="variabilni-symbol" name="variabilni-symbol" value="{{ invoice.variabilni_symbol}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="platebni-metoda">Platebni Metoda:</label>
-                                        <input type="text" class="form-control" id="platebni-metoda" name="platebni-metoda">
+                                        <input type="text" class="form-control" id="platebni-metoda" name="platebni-metoda" value="{{ invoice.platebni_metoda}}">
                                     </div>
                                 </div>
                             </div>
@@ -124,13 +124,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="zaokrouhleni">Zaokrouhlení:</label>
-                                        <input type="text" class="form-control" id="zaokrouhleni" name="zaokrouhleni">
+                                        <input type="text" class="form-control" id="zaokrouhleni" name="zaokrouhleni" value="{{ invoice.zaokrouhleni}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="rpdp">RPDP:</label>
-                                        <input type="text" class="form-control" id="rpdp" name="rpdp">
+                                        <input type="text" class="form-control" id="rpdp" name="rpdp" value="{{ invoice.rpdp}}">
                                     </div>
                                 </div>
                             </div>
@@ -142,33 +142,33 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="vc-dph-21">Vč. DPH 21%:</label>
-                                        <input type="text" class="form-control" id="vc-dph-21" name="vc-dph-21">
+                                        <input type="text" class="form-control" id="vc-dph-21" name="vc-dph-21" value="{{ invoice.vc_dph_21}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="bez-dph-21">Bez DPH 21%:</label>
-                                        <input type="text" class="form-control" id="bez-dph-21" name="bez-dph-21">
+                                        <input type="text" class="form-control" id="bez-dph-21" name="bez-dph-21" value="{{ invoice.bez_dph_21}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="dph-21">DPH 21%:</label>
-                                        <input type="text" class="form-control" id="dph-21" name="dph-21">
+                                        <input type="text" class="form-control" id="dph-21" name="dph-21" value="{{ invoice.dph_21}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="bez-dph-0">Bez DPH 0%:</label>
-                                        <input type="text" class="form-control" id="bez-dph-0" name="bez-dph-0">
+                                        <input type="text" class="form-control" id="bez-dph-0" name="bez-dph-0" value="{{ invoice.bez_dph_0}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="vc-dph-12">Vč. DPH 12%:</label>
-                                        <input type="text" class="form-control" id="vc-dph-12" name="vc-dph-12">
+                                        <input type="text" class="form-control" id="vc-dph-12" name="vc-dph-12" value="{{ invoice.vc_dph_12}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="bez-dph-12">Bez DPH 12%:</label>
-                                        <input type="text" class="form-control" id="bez-dph-12" name="bez-dph-12">
+                                        <input type="text" class="form-control" id="bez-dph-12" name="bez-dph-12" value="{{ invoice.bez_dph_12}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="dph-12">DPH 12%:</label>
-                                        <input type="text" class="form-control" id="dph-12" name="dph-12">
+                                        <input type="text" class="form-control" id="dph-12" name="dph-12" value="{{ invoice.dph_12}}">
                                     </div>
                                 </div>
                             </div>
