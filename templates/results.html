@@ -132,6 +132,102 @@
     <h1 class="py-2 text-center">Porovnání hodnot</h1>
     <table class="table table-custom">
         <tbody>
+            <!-- Porovnání Evidenční číslo -->
+            <tr class="{% if json_data.get('ID') == invoice.evidencni_cislo %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Evidenční číslo</th>
+                <td class="col-sm-3">{{ invoice.evidencni_cislo }}</td>
+                <td class="col-sm-3">{{ json_data.get('ID', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('ID') == invoice.evidencni_cislo %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání Typ faktury -->
+                <tr class="{% if json_data.get('TYPE', '').strip().lower() == invoice.typ_faktury.strip().lower() or json_data.get('TYPE', '').strip().lower() in ['faktura - daňový doklad', 'faktura', 'přijatá faktura', 'faktura přijatá', 'faktura - daňoví doklad'] %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Typ faktury</th>
+                    <td class="col-sm-3">{{ invoice.typ_faktury }}</td>
+                    <td class="col-sm-3">{{ json_data.get('TYPE', 'N/A') }}</td>
+                    <td class="col-sm-3">
+                        {% if json_data.get('TYPE', '').strip().lower() == invoice.typ_faktury.strip().lower() or json_data.get('TYPE', '').strip().lower() in ['faktura - daňový doklad', 'faktura', 'přijatá faktura', 'faktura přijatá', 'faktura - daňoví doklad'] %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            <tr class="{% if json_data.get('SUPPLIER_ADDRESS', '').replace(' ', '').replace('.', '').replace(',', '').lower() == invoice.adresa_dodavatele.replace(' ', '').replace('.', '').replace(',', '').lower() %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Adresa dodavatele</th>
+                <td class="col-sm-3">{{ invoice.adresa_dodavatele }}</td>
+                <td class="col-sm-3">{{ json_data.get('SUPPLIER_ADDRESS', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('SUPPLIER_ADDRESS', '').replace(' ', '').replace('.', '').replace(',', '').lower() == invoice.adresa_dodavatele.replace(' ', '').replace('.', '').replace(',', '').lower() %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr class="{% if json_data.get('SUPPLIER_NAME', '').replace(' ', '').lower() == invoice.jmeno_dodavatele.replace(' ', '').lower() %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Jméno dodavatele</th>
+                <td class="col-sm-3">{{ invoice.jmeno_dodavatele }}</td>
+                <td class="col-sm-3">{{ json_data.get('SUPPLIER_NAME', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('SUPPLIER_NAME', '').replace(' ', '').lower() == invoice.jmeno_dodavatele.replace(' ', '').lower() %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání IČ dodavatele -->
+            <tr class="{% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">IČ dodavatele</th>
+                <td class="col-sm-3">{{ invoice.ico_dodavatele }}</td>
+                <td class="col-sm-3">{{ json_data.get('IC_SUPPLIER', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání DIČ dodavatele -->
+            <tr class="{% if json_data.get('DIC_SUPPLIER') == invoice.dic_dodavatele %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">DIČ dodavatele</th>
+                <td class="col-sm-3">{{ invoice.dic_dodavatele }}</td>
+                <td class="col-sm-3">{{ json_data.get('DIC_SUPPLIER', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('DIC_SUPPLIER') == invoice.dic_dodavatele %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání Číslo účtu -->
+            <tr class="{% if json_data.get('ACCOUNT_NUMBER') == invoice.cislo_uctu %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Číslo účtu</th>
+                <td class="col-sm-3">{{ invoice.cislo_uctu }}</td>
+                <td class="col-sm-3">{{ json_data.get('ACCOUNT_NUMBER', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('ACCOUNT_NUMBER') == invoice.cislo_uctu %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
             <!-- Porovnání Variabilní symbol -->
             <tr class="{% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}text-success{% else %}text-danger{% endif %}">
                 <th class="col-sm-3">Variabilní symbol</th>
@@ -139,26 +235,224 @@
                 <td class="col-sm-3">{{ json_data.get('VARIABLE_SYMBOL', 'N/A') }}</td>
                 <td class="col-sm-3">
                     {% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}
-                        <span class="badge bg-success">TRUE</span> <!-- Zelený štítek -->
+                        <span class="badge bg-success">TRUE</span>
                     {% else %}
-                        <span class="badge bg-danger">FALSE</span> <!-- Červený štítek -->
+                        <span class="badge bg-danger">FALSE</span>
                     {% endif %}
                 </td>
             </tr>
 
-            <!-- Další porovnání -->
-            <tr class="{% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}text-success{% else %}text-danger{% endif %}">
-                <th class="col-sm-3">IČ dodavatele</th>
-                <td class="col-sm-3">{{ invoice.ico_dodavatele }}</td>
-                <td class="col-sm-3">{{ json_data.get('IC_SUPPLIER', 'N/A') }}</td>
+            <!-- Porovnání Datum vystavení -->
+                <tr class="{% if json_data.get('PUBLICATION_DATE') == invoice.datum_vystaveni.strftime('%d.%m.%Y') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Datum vystavení</th>
+                    <td class="col-sm-3">{{ invoice.datum_vystaveni.strftime('%d.%m.%Y') if invoice.datum_vystaveni else '' }}</td>
+                    <td class="col-sm-3">{{ json_data.get('PUBLICATION_DATE', 'N/A') }}</td>
+                    <td class="col-sm-3">
+                        {% if json_data.get('PUBLICATION_DATE') == invoice.datum_vystaveni.strftime('%d.%m.%Y') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            <!-- Porovnání Datum UZP -->
+            <tr class="{% if json_data.get('TAX_POINT') == invoice.datum_uzp.strftime('%d.%m.%Y') %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Datum UZP</th>
+                <td class="col-sm-3">{{ invoice.datum_uzp.strftime('%d.%m.%Y') if invoice.datum_uzp else '' }}</td>
+                <td class="col-sm-3">{{ json_data.get('TAX_POINT', 'N/A') }}</td>
                 <td class="col-sm-3">
-                    {% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}
-                        <span class="badge bg-success">TRUE</span> <!-- Zelený štítek -->
+                    {% if json_data.get('TAX_POINT') == invoice.datum_uzp.strftime('%d.%m.%Y') %}
+                        <span class="badge bg-success">TRUE</span>
                     {% else %}
-                        <span class="badge bg-danger">FALSE</span> <!-- Červený štítek -->
+                        <span class="badge bg-danger">FALSE</span>
                     {% endif %}
                 </td>
             </tr>
+
+            <!-- Porovnání Datum splatnosti -->
+                <tr class="{% if json_data.get('DUE_DATE') == invoice.datum_splatnosti.strftime('%d.%m.%Y') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Datum splatnosti</th>
+                    <td class="col-sm-3">{{ invoice.datum_splatnosti.strftime('%d.%m.%Y') if invoice.datum_splatnosti else '' }}</td>
+                    <td class="col-sm-3">{{ json_data.get('DUE_DATE', 'N/A') }}</td>
+                    <td class="col-sm-3">
+                        {% if json_data.get('DUE_DATE') == invoice.datum_splatnosti.strftime('%d.%m.%Y') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            <!-- Porovnání Platební metoda -->
+            <tr class="{% if json_data.get('PAYMENT_METHOD') == invoice.platebni_metoda %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Platební metoda</th>
+                <td class="col-sm-3">{{ invoice.platebni_metoda }}</td>
+                <td class="col-sm-3">{{ json_data.get('PAYMENT_METHOD', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('PAYMENT_METHOD') == invoice.platebni_metoda %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání Měna -->
+            <tr class="{% if (invoice.mena == 'CZK' and json_data.get('CURRENCY') in ['CZK', 'Kč']) or (invoice.mena == 'EUR' and json_data.get('CURRENCY') in ['EUR', 'E', '€']) %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Měna</th>
+                <td class="col-sm-3">{{ invoice.mena }}</td>
+                <td class="col-sm-3">{{ json_data.get('CURRENCY', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if (invoice.mena == 'CZK' and json_data.get('CURRENCY') in ['CZK', 'Kč']) or (invoice.mena == 'EUR' and json_data.get('CURRENCY') in ['EUR', 'E', '€']) %}
+                        <span class="badge bg-success">TRUE</span>
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <!-- Porovnání RPDP -->
+                <tr class="{% if (not invoice.rpdp and json_data.get('RPDP') in [None, '', False]) or (invoice.rpdp and json_data.get('RPDP') == invoice.rpdp) %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">RPDP</th>
+                    <td class="col-sm-3">{{ invoice.rpdp }}</td>
+                    <td class="col-sm-3">{{ json_data.get('RPDP', 'N/A') }}</td>
+                    <td class="col-sm-3">
+                        {% if (not invoice.rpdp and json_data.get('RPDP') in [None, '', False]) or (invoice.rpdp and json_data.get('RPDP') == invoice.rpdp) %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            <!-- Porovnání Zaokrouhlení -->
+                <tr class="{% if (not invoice.zaokrouhleni and json_data.get('ROUNDING') in [None, '', 'N/A', 0, '0']) or (json_data.get('ROUNDING') == invoice.zaokrouhleni) %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Zaokrouhlení</th>
+                    <td class="col-sm-3">{{ invoice.zaokrouhleni }}</td>
+                    <td class="col-sm-3">{{ json_data.get('ROUNDING', 'N/A') }}</td>
+                    <td class="col-sm-3">
+                        {% if (not invoice.zaokrouhleni and json_data.get('ROUNDING') in [None, '', 'N/A', 0, '0']) or (json_data.get('ROUNDING') == invoice.zaokrouhleni) %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+
+{% if invoice.vc_dph_21 or invoice.bez_dph_21 or invoice.dph_21 %}
+    {% if 'VAT_TABLE' in json_data %}
+        {% for vat_entry in json_data['VAT_TABLE'] %}
+            {% if vat_entry['VAT_RATE'] == '21%' %}
+                <tr class="{% if vat_entry['VAT_RATE'] == '21%' %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Cena s DPH 21 %</th>
+                    <td class="col-sm-3">{{ invoice.vc_dph_21 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['PRICE_INCLUDING_VAT'].replace(',', '.') == invoice.vc_dph_21.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="{% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_21.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Cena bez DPH 21 %</th>
+                    <td class="col-sm-3">{{ invoice.bez_dph_21 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_21.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="{% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_21.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">DPH 21 %</th>
+                    <td class="col-sm-3">{{ invoice.dph_21 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['VAT_AMOUNT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_21.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+{% if invoice.vc_dph_12 or invoice.bez_dph_12 or invoice.dph_12 %}
+    {% if 'VAT_TABLE' in json_data %}
+        {% for vat_entry in json_data['VAT_TABLE'] %}
+            {% if vat_entry['VAT_RATE'] == '12%' %}
+                <tr class="{% if vat_entry['VAT_RATE'] == '12%' %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Cena s DPH 12 %</th>
+                    <td class="col-sm-3">{{ invoice.vc_dph_12 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['PRICE_INCLUDING_VAT'].replace(',', '.') == invoice.vc_dph_12.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="{% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_12.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Cena bez DPH 12 %</th>
+                    <td class="col-sm-3">{{ invoice.bez_dph_12 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_12.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="{% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_12.replace(',', '.') %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">DPH 12 %</th>
+                    <td class="col-sm-3">{{ invoice.dph_12 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['VAT_AMOUNT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['VAT_AMOUNT'].replace(',', '.') == invoice.dph_12.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+<!-- Porovnání pro 0% DPH -->
+{% if invoice.bez_dph_0 %}
+    {% if 'VAT_TABLE' in json_data %}
+        {% for vat_entry in json_data['VAT_TABLE'] %}
+            {% if vat_entry['VAT_RATE'] == '0%' %}
+                <tr class="{% if vat_entry['VAT_RATE'] == '0%' %}text-success{% else %}text-danger{% endif %}">
+                    <th class="col-sm-3">Cena bez DPH 0 %</th>
+                    <td class="col-sm-3">{{ invoice.bez_dph_0 }}</td>
+                    <td class="col-sm-3">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
+                    <td class="col-sm-3">
+                        {% if vat_entry['PRICE_WITHOUT_VAT'].replace(',', '.') == invoice.bez_dph_0.replace(',', '.') %}
+                            <span class="badge bg-success">TRUE</span>
+                        {% else %}
+                            <span class="badge bg-danger">FALSE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+
         </tbody>
     </table>
 </div>

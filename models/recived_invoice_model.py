@@ -10,7 +10,7 @@ class RecivedInvoiceVATPayer(db.Model):
     typ_faktury = db.Column(db.String(120), nullable=True)
 
     jmeno_dodavatele = db.Column(db.String(120), nullable=True)
-    adresa_dodavatele = db.Column(db.String(120), nullable=True)
+    adresa_dodavatele = db.Column(db.String(520), nullable=True)
     ico_dodavatele = db.Column(db.String(120), nullable=True)
     dic_dodavatele = db.Column(db.String(120), nullable=True)
 

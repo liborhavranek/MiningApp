@@ -35,7 +35,6 @@ def send_file_recieved_vat_payer_invoice(id):
             response.raise_for_status()  # Raises an exception for 4xx/5xx errors
             result = response.json()
         except (requests.exceptions.RequestException, ValueError):
-            # Fallback JSON data for testing when the API call fails
             result = {
                 "metadata": {
                     "inputTokens": 1964,
@@ -100,7 +99,7 @@ def send_file_recieved_vat_payer_invoice(id):
             'TYPE': ['TYPE'],
             'IS_DEFERRED_TAX': ['IS_DEFERRED_TAX'],
             'ROUNDING': ['ROUNDING'],
-            'ID': ['ID'],
+            'ID': ['ID', 'EVIDENCE_NUMBER'],
             # VAT_TABLE items
             'VAT_RATE': ['VAT_RATE'],
             'PRICE_INCLUDING_VAT': ['PRICE_INCLUDING_VAT'],
@@ -129,6 +128,7 @@ def send_file_recieved_vat_payer_invoice(id):
                 vat_table.append(vat_standardized_entry)
             standardized_result['VAT_TABLE'] = vat_table
 
+        # Popis klíčů
         key_descriptions = {
             'ID': 'Číslo dokladu',
             'TYPE': 'Typ',
@@ -152,4 +152,39 @@ def send_file_recieved_vat_payer_invoice(id):
             'VAT_AMOUNT': 'Výše DPH'
         }
 
-        return render_template('results.html', result=result, json_data=standardized_result, key_descriptions=key_descriptions, invoice=invoice)
+        # Porovnání výsledků a příprava dat pro šablonu
+        comparison_results = []
+        for key, description in key_descriptions.items():
+            # Pro hlavní položky faktury
+            invoice_value = getattr(invoice, key.lower(), None)
+            json_value = standardized_result.get(key, 'null')
+            match = invoice_value == json_value
+            comparison_results.append({
+                'description': description,
+                'invoice_value': invoice_value,
+                'json_value': json_value,
+                'match': match
+            })
+
+        # Porovnání pro VAT table
+        if 'VAT_TABLE' in standardized_result:
+            for index, vat_entry in enumerate(standardized_result['VAT_TABLE']):
+                for vat_key, vat_description in key_descriptions.items():
+                    if vat_key in ['VAT_RATE', 'PRICE_INCLUDING_VAT', 'PRICE_WITHOUT_VAT', 'VAT_AMOUNT']:
+                        invoice_vat_value = None  # Zde byste měli získat odpovídající hodnotu z invoice, pokud existuje
+                        json_vat_value = vat_entry.get(vat_key, 'null')
+                        match = invoice_vat_value == json_vat_value
+                        comparison_results.append({
+                            'description': f"{vat_description} (záznam {index + 1})",
+                            'invoice_value': invoice_vat_value,
+                            'json_value': json_vat_value,
+                            'match': match
+                        })
+
+        return render_template('results.html',
+                               result=result,
+                               json_data=standardized_result,
+                               comparison_results=comparison_results,
+                               key_descriptions=key_descriptions,
+                               invoice=invoice)
+
