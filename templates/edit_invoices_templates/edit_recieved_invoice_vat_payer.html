@@ -6,7 +6,7 @@
         <!-- Formulář pro nahrání souboru -->
 
             <div class="form-container " id="form-container">
-                <h1 class="py-5 text-center">Nahrát fakturu</h1>
+                <h1 class="py-5 text-center">Editovat fakturu</h1>
 
        <form action="{{ url_for('edit_invoice_blueprint.edit_recived_invoice_vat_payer', id=invoice.id) }}" method="post" enctype="multipart/form-data" class="invoice-form">
 
@@ -31,13 +31,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="evidencni-cislo">Evidenční číslo:</label>
-                                        <input type="text" class="form-control" id="evidencni-cislo" name="evidencni-cislo">
+                                        <input type="text" class="form-control" id="evidencni-cislo" name="evidencni-cislo" value="{{ invoice.evidencni_cislo}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="typ-faktury">Typ faktury:</label>
-                                        <input type="text" class="form-control" id="typ-faktury" name="typ-faktury">
+                                        <input type="text" class="form-control" id="typ-faktury" name="typ-faktury" value="{{ invoice.typ_faktury}}">
                                     </div>
                                 </div>
                             </div>

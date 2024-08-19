@@ -69,11 +69,17 @@ def send_file_recieved_vat_payer_invoice(id):
                     "ID": "2244996",
                     "VAT_TABLE": [
                         {
+                            "VAT_RATE": "21%",
+                            "PRICE_INCLUDING_VAT": 1,
+                            "PRICE_WITHOUT_VAT": 1,
+                            "VAT_AMOUNT": 1
+                        },
+                        {
                             "VAT_RATE": "12%",
                             "PRICE_INCLUDING_VAT": 15071,
                             "PRICE_WITHOUT_VAT": 13456.25,
                             "VAT_AMOUNT": 1614.75
-                        }
+                        },
                     ]
                 }
             }
@@ -84,7 +90,7 @@ def send_file_recieved_vat_payer_invoice(id):
             'SUPPLIER_ADDRESS': ['SUPPLIER_ADDRESS'],
             'IC_SUPPLIER': ['IC_SUPPLIER'],
             'DIC_SUPPLIER': ['DIC_SUPPLIER'],
-            'ACCOUNT_NUMBER': ['ACCOUNT_NUMBER'],
+            'ACCOUNT_NUMBER': ['ACCOUNT_NUMBER', 'BANK_ACCOUNT'],
             'VARIABLE_SYMBOL': ['VARIABLE_SYMBOL'],
             'PUBLICATION_DATE': ['PUBLICATION_DATE'],
             'TAX_POINT': ['TAX_POINT'],
@@ -93,8 +99,13 @@ def send_file_recieved_vat_payer_invoice(id):
             'CURRENCY': ['CURRENCY'],
             'TYPE': ['TYPE'],
             'IS_DEFERRED_TAX': ['IS_DEFERRED_TAX'],
-            'BANK_ACCOUNT': ['BANK_ACCOUNT'],
-            'ID': ['ID']
+            'ROUNDING': ['ROUNDING'],
+            'ID': ['ID'],
+            # VAT_TABLE items
+            'VAT_RATE': ['VAT_RATE'],
+            'PRICE_INCLUDING_VAT': ['PRICE_INCLUDING_VAT'],
+            'PRICE_WITHOUT_VAT': ['PRICE_WITHOUT_VAT'],
+            'VAT_AMOUNT': ['VAT_AMOUNT']
         }
 
         # Přiřazení hodnot z result do klíčů podle aliasů
@@ -104,6 +115,19 @@ def send_file_recieved_vat_payer_invoice(id):
                 if alias in result['result']:
                     standardized_result[main_key] = result['result'][alias]
                     break
+
+        # Zpracování VAT_TABLE
+        vat_table = []
+        if 'VAT_TABLE' in result['result']:
+            for vat_entry in result['result']['VAT_TABLE']:
+                vat_standardized_entry = {}
+                for main_key, aliases in key_aliases.items():
+                    for alias in aliases:
+                        if alias in vat_entry:
+                            vat_standardized_entry[main_key] = vat_entry[alias]
+                            break
+                vat_table.append(vat_standardized_entry)
+            standardized_result['VAT_TABLE'] = vat_table
 
         key_descriptions = {
             'ID': 'Číslo dokladu',
@@ -120,7 +144,12 @@ def send_file_recieved_vat_payer_invoice(id):
             'PAYMENT_METHOD': 'Platební metoda',
             'CURRENCY': 'Měna',
             'IS_DEFERRED_TAX': 'RPDP',
-            'BANK_ACCOUNT': 'Číslo účtu',
+            'ROUNDING': 'Zaokrouhlení',
+            # VAT_TABLE descriptions
+            'VAT_RATE': 'Sazba DPH',
+            'PRICE_INCLUDING_VAT': 'Cena včetně DPH',
+            'PRICE_WITHOUT_VAT': 'Cena bez DPH',
+            'VAT_AMOUNT': 'Výše DPH'
         }
 
-        return render_template('results.html', json_data=standardized_result, key_descriptions=key_descriptions, invoice=invoice)
+        return render_template('results.html', result=result, json_data=standardized_result, key_descriptions=key_descriptions, invoice=invoice)

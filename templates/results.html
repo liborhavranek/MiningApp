@@ -15,7 +15,7 @@
 
         <!-- Div pro JSON data -->
         <div id="jsonData">
-            <pre>{{ json_data | tojson(indent=2) | safe }}</pre>
+            <pre>{{ result | tojson(indent=2) | safe }}</pre>
         </div>
     </div>
 
@@ -34,100 +34,74 @@
             }
         });
     </script>
-        <div class="col-md-6">
-            <h2>Vytěžené údaje z faktury</h2>
-            <dl class="row">
-                {% for key, description in key_descriptions.items() %}
-                    {% set value = json_data.get(key, None) %}
-                    <dt class="col-sm-4">{{ description }}</dt>
-                    <dd class="col-sm-8">{{ value if value is not none else 'null' }}</dd>
-                {% endfor %}
-            </dl>
 
-
-{% if 'VAT_TABLE' in json_data %}
-    <h4>VAT Table</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>VAT Rate</th>
-                <th>Price Including VAT</th>
-                <th>Price Without VAT</th>
-                <th>VAT Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for vat_entry in json_data['VAT_TABLE'] %}
-                <tr>
-                    <td>{{ vat_entry['VAT_RATE'] }}</td>
-                    <td>{{ vat_entry['PRICE_INCLUDING_VAT'] }}</td>
-                    <td>{{ vat_entry['PRICE_WITHOUT_VAT'] }}</td>
-                    <td>{{ vat_entry['VAT_AMOUNT'] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
-            </dl>
-        </div>
         <div class="col-md-6">
+    <h2>Vytěžené údaje z faktury</h2>
+    </div>
+                <div class="col-md-6">
             <h2>Skutečné údaje na faktuře </h2>
+    </div>
+<div class="col-md-8">
+    <dl class="row">
+{% for key, description in key_descriptions.items() %}
+            {% set value = json_data.get(key, None) %}
+            {% if key not in ['VAT_RATE', 'PRICE_INCLUDING_VAT', 'PRICE_WITHOUT_VAT', 'VAT_AMOUNT'] %}
+                <dt class="col-sm-4">{{ description }}</dt>
+                <dd class="col-sm-8">{{ value if value is not none else 'null' }}</dd>
+            {% endif %}
+        {% endfor %}
+
+        {% if 'VAT_TABLE' in json_data %}
+            {% for vat_entry in json_data['VAT_TABLE'] %}
+                <dt class="col-sm-4">{{ key_descriptions['VAT_RATE'] }}</dt>
+                <dd class="col-sm-8">{{ vat_entry['VAT_RATE'] }}</dd>
+
+                <dt class="col-sm-4">{{ key_descriptions['PRICE_INCLUDING_VAT'] }}</dt>
+                <dd class="col-sm-8">{{ vat_entry['PRICE_INCLUDING_VAT'] }}</dd>
+
+                <dt class="col-sm-4">{{ key_descriptions['PRICE_WITHOUT_VAT'] }}</dt>
+                <dd class="col-sm-8">{{ vat_entry['PRICE_WITHOUT_VAT'] }}</dd>
+
+                <dt class="col-sm-4">{{ key_descriptions['VAT_AMOUNT'] }}</dt>
+                <dd class="col-sm-8">{{ vat_entry['VAT_AMOUNT'] }}</dd>
+            {% endfor %}
+        {% endif %}
+    </dl>
+</div>
+        <div class="col-md-4">
+
 
 
 <dl class="row">
-                <dt class="col-sm-4">ID</dt>
-                <dd class="col-sm-8">{{ invoice.id }}</dd>
+                <dd>{{ invoice.evidencni_cislo }}</dd>
 
-                <dt class="col-sm-4">Typ faktury</dt>
-                <dd class="col-sm-8">{{ invoice.typ_faktury }}</dd>
+                <dd>{{ invoice.typ_faktury }}</dd>
 
-                <dt class="col-sm-4">Jméno dodavatele</dt>
-                <dd class="col-sm-8">{{ invoice.jmeno_dodavatele }}</dd>
+                <dd>{{ invoice.adresa_dodavatele }}</dd>
 
-                <dt class="col-sm-4">IČ dodavatele</dt>
-                <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
+                <dd>{{ invoice.jmeno_dodavatele }}</dd>
 
-                <dt class="col-sm-4">DIČ dodavatele</dt>
-                <dd class="col-sm-8">{{ invoice.dic_dodavatele }}</dd>
+                <dd>{{ invoice.ico_dodavatele }}</dd>
 
-                <dt class="col-sm-4">Jméno odběratele</dt>
-                <dd class="col-sm-8">{{ invoice.jmeno_odberatele }}</dd>
+                <dd>{{ invoice.dic_dodavatele }}</dd>
 
-                <dt class="col-sm-4">IČ odběratele</dt>
-                <dd class="col-sm-8">{{ invoice.ico_odberatele }}</dd>
+                <dd>{{ invoice.cislo_uctu }}</dd>
 
-                <dt class="col-sm-4">DIČ odběratele</dt>
-                <dd class="col-sm-8">{{ invoice.dic_odberatele }}</dd>
+                <dd>{{ invoice.variabilni_symbol }}</dd>
 
-                <dt class="col-sm-4">Datum vystavení</dt>
-                <dd class="col-sm-8">{{ invoice.datum_vystaveni }}</dd>
+                <dd>{{ invoice.datum_vystaveni }}</dd>
 
-                <dt class="col-sm-4">Datum splatnosti</dt>
-                <dd class="col-sm-8">{{ invoice.datum_splatnosti }}</dd>
+                <dd>{{ invoice.datum_uzp }}</dd>
 
-                <dt class="col-sm-4">Datum uzp</dt>
-                <dd class="col-sm-8">{{ invoice.datum_uzp }}</dd>
+                <dd>{{ invoice.datum_splatnosti }}</dd>
 
-                <dt class="col-sm-4">Číslo účtu</dt>
-                <dd class="col-sm-8">{{ invoice.cislo_uctu }}</dd>
+                <dd>{{ invoice.platebni_metoda }}</dd>
 
-                <dt class="col-sm-4">Měna</dt>
-                <dd class="col-sm-8">{{ invoice.mena }}</dd>
+                <dd>{{ invoice.mena }}</dd>
 
-                <dt class="col-sm-4">Variabilní symbol</dt>
-                <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
+                <dd>{{ invoice.rpdp }}</dd>
 
-                <dt class="col-sm-4">Cena</dt>
-                <dd class="col-sm-8">{{ invoice.price }}</dd>
-
-                <dt class="col-sm-4">DPH celkem</dt>
-                <dd class="col-sm-8">{{ invoice.dph_celkem }}</dd>
-
-                <dt class="col-sm-4">Cena celkem</dt>
-                <dd class="col-sm-8">{{ invoice.cena_celkem }}</dd>
-
-                <dt class="col-sm-4">Zaokrouhlení</dt>
-                <dd class="col-sm-8">{{ invoice.zaokrouhleni }}</dd>
+                <dd>{{ invoice.zaokrouhleni }}</dd>
             </dl>
         </div>
     </div>
