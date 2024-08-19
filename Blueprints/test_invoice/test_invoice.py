@@ -52,33 +52,33 @@ def send_file_recieved_vat_payer_invoice(id):
                     ]
                 },
                 "result": {
-                    "SUPPLIER_NAME": "Polívka Libor - POLI",
-                    "SUPPLIER_ADDRESS": "U Trojice 13, 370 04 České Budějovice",
-                    "IC_SUPPLIER": "47228881",
-                    "DIC_SUPPLIER": "CZ7401281294",
-                    "ACCOUNT_NUMBER": "273077329 / 0300",
-                    "PUBLICATION_DATE": "04.07.2024",
-                    "TAX_POINT": "04.07.2024",
-                    "DUE_DATE": "18.07.2024",
-                    "VARIABLE_SYMBOL": "2244996",
-                    "PAYMENT_METHOD": "Převodem",
+                    "ACCOUNT_NUMBER": "76202231/0100",
                     "CURRENCY": "Kč",
-                    "TYPE": "FAKTURA - DAŇOVÝ",
+                    "DIC_SUPPLIER": "CZ48207691",
+                    "DUE_DATE": "29.08.2024",
+                    "IC_SUPPLIER": "48207691",
+                    "ID": "240735",
                     "IS_DEFERRED_TAX": "null",
+                    "PAYMENT_METHOD": "Převodem",
+                    "PUBLICATION_DATE": "15.08.2024",
                     "ROUNDING": "null",
-                    "ID": "2244996",
+                    "SUPPLIER_ADDRESS": "Husova tř. 1821/4 37001 České Budějovice Czech Republic",
+                    "SUPPLIER_NAME": "PF Č.Budějovice spol. s r.o.",
+                    "TAX_POINT": "15.08.2024",
+                    "TYPE": "Faktura - daňoví doklad",
+                    "VARIABLE_SYMBOL": "240735",
                     "VAT_TABLE": [
                         {
-                            "VAT_RATE": "21%",
-                            "PRICE_INCLUDING_VAT": 1,
-                            "PRICE_WITHOUT_VAT": 1,
-                            "VAT_AMOUNT": 1
+                            "PRICE_INCLUDING_VAT": "615.29",
+                            "PRICE_WITHOUT_VAT": "508.5",
+                            "VAT_AMOUNT": "106.79",
+                            "VAT_RATE": "21%"
                         },
                         {
-                            "VAT_RATE": "12%",
-                            "PRICE_INCLUDING_VAT": 15071,
-                            "PRICE_WITHOUT_VAT": 13456.25,
-                            "VAT_AMOUNT": 1614.75
+                            "PRICE_INCLUDING_VAT": "2406.32",
+                            "PRICE_WITHOUT_VAT": "2148.5",
+                            "VAT_AMOUNT": "257.82",
+                            "VAT_RATE": "12%"
                         },
                     ]
                 }

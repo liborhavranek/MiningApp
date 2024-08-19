@@ -47,7 +47,7 @@
             {% set value = json_data.get(key, None) %}
             {% if key not in ['VAT_RATE', 'PRICE_INCLUDING_VAT', 'PRICE_WITHOUT_VAT', 'VAT_AMOUNT'] %}
                 <dt class="col-sm-4">{{ description }}</dt>
-                <dd class="col-sm-8">{{ value if value is not none else 'null' }}</dd>
+                <dd class="col-sm-8 text-truncate" style="max-width: 100%;">{{ value if value is not none else 'null' }}</dd>
             {% endif %}
         {% endfor %}
 
@@ -73,67 +73,95 @@
 
 
 <dl class="row">
-                <dd>{{ invoice.evidencni_cislo }}</dd>
+        <dd>{{ invoice.evidencni_cislo if invoice.evidencni_cislo else 'null' }}</dd>
 
-                <dd>{{ invoice.typ_faktury }}</dd>
+        <dd>{{ invoice.typ_faktury if invoice.typ_faktury else 'null' }}</dd>
 
-                <dd>{{ invoice.adresa_dodavatele }}</dd>
+        <dd class="text-truncate" style="max-width: 100%;">{{ invoice.adresa_dodavatele if invoice.adresa_dodavatele else 'null' }}</dd>
 
-                <dd>{{ invoice.jmeno_dodavatele }}</dd>
+        <dd class="text-truncate" style="max-width: 100%;">{{ invoice.jmeno_dodavatele if invoice.jmeno_dodavatele else 'null' }}</dd>
 
-                <dd>{{ invoice.ico_dodavatele }}</dd>
+        <dd>{{ invoice.ico_dodavatele if invoice.ico_dodavatele else 'null' }}</dd>
 
-                <dd>{{ invoice.dic_dodavatele }}</dd>
+        <dd>{{ invoice.dic_dodavatele if invoice.dic_dodavatele else 'null' }}</dd>
 
-                <dd>{{ invoice.cislo_uctu }}</dd>
+        <dd>{{ invoice.cislo_uctu if invoice.cislo_uctu else 'null' }}</dd>
 
-                <dd>{{ invoice.variabilni_symbol }}</dd>
+        <dd>{{ invoice.variabilni_symbol if invoice.variabilni_symbol else 'null' }}</dd>
 
-                <dd>{{ invoice.datum_vystaveni }}</dd>
+        <dd>{{ invoice.datum_vystaveni if invoice.datum_vystaveni else 'null' }}</dd>
 
-                <dd>{{ invoice.datum_uzp }}</dd>
+        <dd>{{ invoice.datum_uzp if invoice.datum_uzp else 'null' }}</dd>
 
-                <dd>{{ invoice.datum_splatnosti }}</dd>
+        <dd>{{ invoice.datum_splatnosti if invoice.datum_splatnosti else 'null' }}</dd>
 
-                <dd>{{ invoice.platebni_metoda }}</dd>
+        <dd>{{ invoice.platebni_metoda if invoice.platebni_metoda else 'null' }}</dd>
 
-                <dd>{{ invoice.mena }}</dd>
+        <dd>{{ invoice.mena if invoice.mena else 'null' }}</dd>
 
-                <dd>{{ invoice.rpdp }}</dd>
+        <dd>{{ invoice.rpdp if invoice.rpdp else 'null' }}</dd>
 
-                <dd>{{ invoice.zaokrouhleni }}</dd>
+        <dd>{{ invoice.zaokrouhleni if invoice.zaokrouhleni else 'null' }}</dd>
+
+        {% if invoice.vc_dph_21 or invoice.bez_dph_21 or invoice.dph_21 %}
+            <dd> 21 %</dd>  <!-- Prázdné pole se zobrazí pouze, pokud alespoň jedna z položek není prázdná -->
+            <dd>{{ invoice.vc_dph_21 }}</dd>
+            <dd>{{ invoice.bez_dph_21 }}</dd>
+            <dd>{{ invoice.dph_21 }}</dd>
+        {% endif %}
+
+        {% if invoice.vc_dph_12 or invoice.bez_dph_12 or invoice.dph_12 %}
+            <dd>12 %</dd>  <!-- Prázdné pole se zobrazí pouze, pokud alespoň jedna z položek není prázdná -->
+            <dd>{{ invoice.vc_dph_12 }}</dd>
+            <dd>{{ invoice.bez_dph_12 }}</dd>
+            <dd>{{ invoice.dph_12 }}</dd>
+        {% endif %}
+
+        {% if invoice.bez_dph_0 %}
+            <dd>0 %</dd>  <!-- Prázdné pole se zobrazí pouze, pokud alespoň jedna z položek není prázdná -->
+            <dd>{{ invoice.bez_dph_0 }}</dd>
+            <dd>{{ invoice.bez_dph_0 }}</dd>
+            <dd>0</dd>
+        {% endif %}
             </dl>
         </div>
     </div>
 
 
-<dl class="row">
-    <!-- Porovnání Variabilní symbol -->
-    <dt class="col-sm-4">Variabilní symbol</dt>
-    <dd class="col-sm-8">{{ invoice.variabilni_symbol }}</dd>
-    <dt class="col-sm-4">Variabilní symbol (JSON)</dt>
-    <dd class="col-sm-8">
-        {{ json_data.get('VARIABLE_SYMBOL', 'N/A') }}
-        {% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}
-            (Shoduje se)
-        {% else %}
-            (Neshoduje se)
-        {% endif %}
-    </dd>
+<div class="container">
+    <h1 class="py-2 text-center">Porovnání hodnot</h1>
+    <table class="table table-custom">
+        <tbody>
+            <!-- Porovnání Variabilní symbol -->
+            <tr class="{% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">Variabilní symbol</th>
+                <td class="col-sm-3">{{ invoice.variabilni_symbol }}</td>
+                <td class="col-sm-3">{{ json_data.get('VARIABLE_SYMBOL', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('VARIABLE_SYMBOL') == invoice.variabilni_symbol %}
+                        <span class="badge bg-success">TRUE</span> <!-- Zelený štítek -->
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span> <!-- Červený štítek -->
+                    {% endif %}
+                </td>
+            </tr>
 
-    <!-- Další porovnání -->
-    <dt class="col-sm-4">IČ dodavatele</dt>
-    <dd class="col-sm-8">{{ invoice.ico_dodavatele }}</dd>
-    <dt class="col-sm-4">IČ dodavatele (JSON)</dt>
-    <dd class="col-sm-8">
-        {{ json_data.get('IC_SUPPLIER', 'N/A') }}
-        {% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}
-            (Shoduje se)
-        {% else %}
-            (Neshoduje se)
-        {% endif %}
-    </dd>
-</dl>
+            <!-- Další porovnání -->
+            <tr class="{% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}text-success{% else %}text-danger{% endif %}">
+                <th class="col-sm-3">IČ dodavatele</th>
+                <td class="col-sm-3">{{ invoice.ico_dodavatele }}</td>
+                <td class="col-sm-3">{{ json_data.get('IC_SUPPLIER', 'N/A') }}</td>
+                <td class="col-sm-3">
+                    {% if json_data.get('IC_SUPPLIER') == invoice.ico_dodavatele %}
+                        <span class="badge bg-success">TRUE</span> <!-- Zelený štítek -->
+                    {% else %}
+                        <span class="badge bg-danger">FALSE</span> <!-- Červený štítek -->
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 </div>
 
